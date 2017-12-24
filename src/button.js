@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
-import './application.env'
+import ENV from './config'
 import './button.css'
 
 export default class Button extends Component {
@@ -30,7 +30,7 @@ export default class Button extends Component {
   render() {
     return (
       <GoogleLogin
-        clientId={GOOGLE_ID}
+        clientId={ENV['GOOGLE_ID']}
         onSuccess={this.responseGoogle}
         onFailure={this.responseGoogle}
 
