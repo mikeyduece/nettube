@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+// Boilerplate stuff
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(https://assets.nflxext.com/ffe/siteui/vlv3/5e3955d1-a2b3-4753-bff2-875bf84330fa/412c42ad-ce5f-4c66-ad9f-3f63cab49b22/US-en-20171030-popsignuptwoweeks-perspective_alpha_website_small.jpg)
+}
+
+button ~ button {
+  margin-left: 20px;
+}
+
+#login-page {
+  margin: auto;
+  text-align: center;
+  padding-top: 20em;
+}
+
+.app-name {
+  font-family: Nobile;
+  color: red;
+  text-shadow: .2rem .2rem .5rem white, .2rem .2rem .75rem black;
+  font-weight: bolder;
+  text-shadow: 0.25rem 0.25rem 0.75rem white, 0 5px black;
+  font-weight: bolder;
+  font-size: 10rem;
+}
