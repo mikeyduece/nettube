@@ -1,40 +1,57 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
+import { PostUser } from './components/PostUser'
+import { Redirect } from 'react-router-dom'
 import ENV from './config'
 import './button.css'
 
 export default class Button extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      redirectToReferrer: false
+    }
+    this.signIn = this.signIn.bind(this)
+  }
 
-  responseGoogle(response){
-    console.log(response)
-    fetch('http://localhost:3000/api/v1/auth/google_oauth2/callback',{
-      method: "POST",
-      headers: {
-        'Authorization': response.tokenId,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      mode: 'cors',
-      body: JSON.stringify({
-        'uid': response.w3.Eea,
-        'full_name': response.w3.ig,
-        'first_name': response.w3.ofa,
-        'last_name': response.w3.wea,
-        'email': response.w3.U3,
-        'token': response.accessToken
+  signIn(res){
+    let userData = {
+        'full_name': res.w3.ig,
+        'first_name': res.w3.ofa,
+        'last_name': res.w3.wea,
+        'email': res.w3.U3,
+        'token': res.accessToken,
+        'image': res.w3.Paa
+
+    }
+
+    PostUser(userData, res.accessToken)
+      .then((result) =>{
+        let responseJson = result
+        if(responseJson.userData){
+          sessionStorage.setItem('userData', JSON.stringify(res.Json))
+          this.setState({redirectToReferrer: true})
+        }
       })
-    })
   }
 
 
   render() {
-    return (
-      <GoogleLogin
-        clientId={ENV['GOOGLE_ID']}
-        onSuccess={this.responseGoogle}
-        onFailure={this.responseGoogle}
+    if(this.state.RedirectToReferrer){
+      return (<Redirect to='/home'/>)
+    }
 
-      />
+    const responseGoogle = (response) => {
+      console.log(response)
+      this.signIn(response)
+    }
+
+    return (
+        <GoogleLogin
+          clientId={ENV['GOOGLE_ID']}
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+        />
     )
   }
 }
