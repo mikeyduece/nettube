@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
-import { PostUser } from './components/PostUser'
-import { Redirect } from 'react-router-dom'
-import ENV from '../src/config'
-import './button.css'
+import { PostUser } from '../PostUser'
+import ENV from '../../config'
+import './LoginButton.css'
 
-export default class Button extends Component {
+export default class LoginButton extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      redirectToReferrer: false
-    }
     this.signIn = this.signIn.bind(this)
   }
 
@@ -28,19 +24,14 @@ export default class Button extends Component {
     PostUser(userData, res.accessToken)
       .then((result) =>{
         let responseJson = result
-        if(responseJson.userData){
-          sessionStorage.setItem('userData', JSON.stringify(res.Json))
-          this.setState({redirectToReferrer: true})
+        if(responseJson.token == res.accessToken){
+          sessionStorage.setItem('responseJson', JSON.stringify(responseJson))
         }
       })
   }
 
 
   render() {
-    if(this.state.RedirectToReferrer){
-      return (<Redirect to='/home'/>)
-    }
-
     const responseGoogle = (response) => {
       console.log(response)
       this.signIn(response)
@@ -56,3 +47,4 @@ export default class Button extends Component {
     )
   }
 }
+

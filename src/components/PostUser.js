@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 
 export function PostUser(userData, tokenId) {
   return new Promise((resolve, reject) => {
