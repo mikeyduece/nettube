@@ -7,28 +7,30 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    if(localStorage.length !== 0){
-      this.state = JSON.parse(localStorage.userData)
-    }else {
-      this.state = null
-    }
   }
 
   isLoggedIn() {
-    if(this.state === null) {
-      return false
-    } else {
+    if(localStorage.userData) {
       return true
+    } else {
+      return false
     }
+  }
+
+  renderHome() {
+    return <Home />
+  }
+
+  renderLanding() {
+    return <Landing />
   }
 
   render() {
     return (
       <div className='App'>
-        {this.isLoggedIn()
-          ? <Home token={this.state.token} deets={this.state} />
-          : <Landing />
-        }
+      {this.isLoggedIn()
+      ? this.renderHome()
+      : this.renderLanding()}
       </div>
     )
   }

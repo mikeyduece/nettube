@@ -7,25 +7,19 @@ export default class Home extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      'email': props.deets.email,
-      'full_name': props.deets.email,
-      'first_name': props.deets.first_name,
-      'last_name': props.deets.last_name,
-      'image': props.deets.image,
-    }
+    this.state = JSON.parse(localStorage.userData)
   }
 
   logout(){
     console.log('logout')
-    return <Landing />
+    localStorage.clear()
   }
 
   render(){
     return(
       <div>
         <h1>Home Page</h1>
-        <Logout onClick={this.logout}/>
+        <button onClick={this.logout}>Logout</button>
       </div>
     )
   }
