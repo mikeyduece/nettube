@@ -7,13 +7,15 @@ export default class Home extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      info: JSON.parse(props.deets)
+    }
   }
 
-
-  logout(){
-    console.log('logout')
-    localStorage.clear()
+  handleLogout() {
+    this.props.logout()
   }
+
 
   handleToken() {
     if(this.state.token !== this.props.token){
@@ -25,7 +27,7 @@ export default class Home extends Component {
     return(
       <div>
         <h1>Home Page</h1>
-        <button onClick={this.logout}
+        <button onClick={this.handleLogout.bind(this)}
           token={this.props.token}>
           Logout
         </button>
