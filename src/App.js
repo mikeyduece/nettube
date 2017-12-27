@@ -1,36 +1,65 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import Landing from './components/Landing/Landing'
+// import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
+// import Landing from './components/Landing/Landing'
+import { PostUser } from './components/PostUser'
+import './components/LoginButton/LoginButton'
+import ENV from './config'
 import Home from './components/Home/Home'
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-  }
-
-  isLoggedIn() {
-    if(localStorage.userData) {
-      return true
-    } else {
-      return false
+    this.state = {
+      deets: null
     }
   }
 
-  renderHome() {
-    return <Home />
+  signIn(res){
+    let userData = {
+      'full_name': res.w3.ig,
+      'first_name': res.w3.ofa,
+      'last_name': res.w3.wea,
+      'email': res.w3.U3,
+      'token': res.accessToken,
+      'image': res.w3.Paa
+    }
+
+    PostUser(userData, res.accessToken)
+    if(userData.token == res.accessToken){
+      localStorage.setItem('userData', JSON.stringify(userData))
+      this.setState({deets: JSON.parse(localStorage.userData)})
+    }
   }
 
-  renderLanding() {
-    return <Landing />
+
+  renderLogin() {
+    const responseGoogle = (response) => {
+      console.log(response)
+      this.signIn(response)
+    }
+
+    return(
+      <div id='login-page'>
+      <h1 className='app-name'>netTUBE</h1>
+      <GoogleLogin
+      className='loginBtn loginBtn--google'
+      clientId={ENV['GOOGLE_ID']}
+      onSuccess={responseGoogle}
+      onFailure={responseGoogle}
+      />
+      </div>
+    )
   }
+
 
   render() {
     return (
       <div className='App'>
-      {this.isLoggedIn()
-      ? this.renderHome()
-      : this.renderLanding()}
+      {localStorage.userData === undefined
+        ? this.renderLogin()
+        : <Home deets={this.state.deets}/>}
       </div>
     )
   }
