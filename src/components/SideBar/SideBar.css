@@ -1,0 +1,55 @@
+nav {
+  height: 100%;
+  position: fixed;
+  float: left;
+  z-index: 1;
+  /* top: 0; */
+  left: 0;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    text-align: left;
+    padding: 0;
+    width: 25%%;
+    background-color: #0E0E0E;
+    height: 100%;
+    /* position: fixed; */
+    /* overflow: auto */
+}
+
+li a {
+    display: block;
+    color: #FFFFFF;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.mainmenu li:hover .submenu {
+  display: block;
+  max-height: 200px;
+}
+
+.submenu a {
+  background-color: #999;
+  color: #000;
+}
+
+/* hover behaviour for links inside .submenu */
+.submenu a:hover {
+  background-color: #666;
+}
+
+.submenu {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+
