@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 // import Landing from './components/Landing/Landing'
 import { PostUser } from './components/PostUser'
+import { endUserSession } from './components/endUserSession'
 import './components/LoginButton/LoginButton'
 import ENV from './config'
 import Home from './components/Home/Home'
@@ -55,9 +56,9 @@ class App extends Component {
 
   logout(){
     console.log('logout')
+    endUserSession(this.state.deets)
     this.setState({deets: null})
     localStorage.clear()
-
   }
 
   render() {

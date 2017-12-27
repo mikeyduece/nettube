@@ -12,14 +12,14 @@ export function PostUser(userData, tokenId) {
       mode: 'cors',
       body: JSON.stringify(userData)
     })
-      // .then((response) => {
-      //   response.json()
-      // })
-      // .then((res) => {
-      //   resolve(res)
-      // })
-      // .catch((error) => {
-      //   reject(error)
-      // })
+      .then((response) => {
+        response.json()
+      })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((error) => {
+        reject(error)
+      })
   })
 }

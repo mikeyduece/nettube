@@ -1,7 +1,4 @@
 import React, {Component} from 'react'
-// import Logout from '../Logout/Logout'
-// import Landing from '../Landing/Landing'
-// import { Redirect } from 'react-router-dom'
 
 export default class Home extends Component {
 
