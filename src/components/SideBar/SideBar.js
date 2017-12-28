@@ -5,6 +5,10 @@ import './SideBar.css'
 
 export default class SideBar extends Component {
 
+  searchHandler(video) {
+    this.props.search(video)
+  }
+
   handleLogout() {
     this.props.logout()
   }
@@ -13,11 +17,11 @@ export default class SideBar extends Component {
     return(
       <nav className='naviagtion'>
         <ul className='mainmenu'>
-        <div>
+        <div className='img-logout'>
           <img src={this.props.info.image} alt='Avatar' />
           <Logout handleLogout={this.handleLogout.bind(this)}/>
         </div>
-        <SearchBox />
+        <SearchBox search={this.searchHandler.bind(this)}/>
           <li>
             <a href="">home</a>
           </li>

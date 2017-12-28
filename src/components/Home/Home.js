@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import SideBar from '../../components/SideBar/SideBar'
+import Video from '../Video/Video'
+import Main from '../Main/Main'
+// import {searchYoutube} from './searchYoutube'
 
 import './Home.css'
 
@@ -9,11 +12,27 @@ export default class Home extends Component {
     super(props)
     this.state = {
       info: JSON.parse(props.deets),
+      videos : []
     }
   }
 
   handleSearch(video) {
-    debugger
+   fetch(`http://localhost:3000/api/v1/search?q=${video}`)
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data)
+      this.parseVideos(data)
+    })
+    .catch((err) =>{
+      console.log(err)
+    })
+  }
+
+  parseVideos(data) {
+    let vids = data.map((video, i) => {
+      <Video {...vids} key={i} />
+    })
+    return vids
   }
 
   handleLogout() {
@@ -30,8 +49,12 @@ export default class Home extends Component {
   render(){
     return(
       <div>
-        <h1 className='user-home'>{this.state.info.full_name}</h1>
-          <SideBar info={this.state.info} logout={this.handleLogout.bind(this)}/>
+          <SideBar
+            info={this.state.info}
+            logout={this.handleLogout.bind(this)}
+            search={this.handleSearch.bind(this)}
+           />
+          <Main videos={this.parseVideos.bind(this)}/>
       </div>
     )
   }

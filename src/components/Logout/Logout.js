@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import './Logout.css'
 
 export default class Logout extends Component {
 
 
   render(){
     return(
-      <button onClick={this.props.handleLogout}>
+      <button className='signout' onClick={this.props.handleLogout}>
         <i className="fa fa-sign-out" aria-hidden="true"></i>
       </button>
 

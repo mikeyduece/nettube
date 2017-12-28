@@ -8,8 +8,10 @@ form.search-box input[type=text] {
   font-size: 17px;
   border: none;
   float: left;
+  height: 2.25rem;
   width: 80%;
   background: #f1f1f1;
+  border-radius: 5%;
 }
 
 /* Style the submit button */
@@ -34,3 +36,8 @@ form.search-box::after {
   clear: both;
   display: table;
 }
+
+button[type='submit'] {
+  border-radius: 5%;
+}
+
