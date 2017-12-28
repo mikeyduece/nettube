@@ -1,17 +1,18 @@
 nav {
   height: 100%;
+  width: 10rem;
   position: fixed;
   float: left;
   z-index: 1;
-  /* top: 0; */
+  top: 0;
   left: 0;
 }
 ul {
     list-style-type: none;
     margin: 0;
     text-align: left;
-    padding: 0;
-    width: 25%%;
+    padding: 0rem;
+    width: 40%%;
     background-color: #0E0E0E;
     height: 100%;
     /* position: fixed; */
@@ -52,4 +53,11 @@ li a:hover {
   -webkit-transition: all 0.5s ease-out;
 }
 
-
+img {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  margin: 1rem;
+  margin-top: .25rem;
+  padding: .75rem;
+}

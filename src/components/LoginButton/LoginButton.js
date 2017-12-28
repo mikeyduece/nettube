@@ -5,9 +5,9 @@ import ENV from '../../config'
 import './LoginButton.css'
 
 export default class LoginButton extends Component {
-  constructor(props){
-    super(props)
-  }
+  // constructor(props){
+  //   super(props)
+  // }
 
   signIn(res){
     let userData = {
@@ -20,7 +20,7 @@ export default class LoginButton extends Component {
     }
 
     PostUser(userData, res.accessToken)
-    if(userData.token == res.accessToken){
+    if(userData.token === res.accessToken){
       localStorage.setItem('userData', JSON.stringify(userData))
     }
   }
