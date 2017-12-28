@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import SideBar from '../../components/SideBar/SideBar'
+
 import './Home.css'
 
 export default class Home extends Component {
@@ -9,6 +10,10 @@ export default class Home extends Component {
     this.state = {
       info: JSON.parse(props.deets),
     }
+  }
+
+  handleSearch(video) {
+    debugger
   }
 
   handleLogout() {
@@ -26,11 +31,7 @@ export default class Home extends Component {
     return(
       <div>
         <h1 className='user-home'>{this.state.info.full_name}</h1>
-          <SideBar info={this.state.info}/>
-          <button onClick={this.handleLogout.bind(this)}
-            token={this.props.token}>
-            Logout
-          </button>
+          <SideBar info={this.state.info} logout={this.handleLogout.bind(this)}/>
       </div>
     )
   }

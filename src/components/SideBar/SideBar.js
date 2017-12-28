@@ -1,15 +1,23 @@
 import React, {Component} from 'react'
 import SearchBox from '../SearchBox/SearchBox'
+import Logout from '../Logout/Logout'
 import './SideBar.css'
 
 export default class SideBar extends Component {
+
+  handleLogout() {
+    this.props.logout()
+  }
 
   render(){
     return(
       <nav className='naviagtion'>
         <ul className='mainmenu'>
-        <SearchBox image={this.props.info.image}/>
-        <input type='text' />
+        <div>
+          <img src={this.props.info.image} alt='Avatar' />
+          <Logout handleLogout={this.handleLogout.bind(this)}/>
+        </div>
+        <SearchBox />
           <li>
             <a href="">home</a>
           </li>
