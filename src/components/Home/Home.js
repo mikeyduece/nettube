@@ -7,32 +7,28 @@ import Main from '../Main/Main'
 import './Home.css'
 
 export default class Home extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
       info: JSON.parse(props.deets),
-      videos : []
+      videos: []
     }
   }
 
   handleSearch(video) {
-   fetch(`http://localhost:3000/api/v1/search?q=${video}`)
-    .then(response => response.json())
-    .then((data) => {
-      console.log(data)
-      this.parseVideos(data)
-    })
-    .catch((err) =>{
-      console.log(err)
-    })
+    fetch(`http://localhost:3000/api/v1/search?q=${video}`)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        this.parseVideos(data)
+      })
+      .catch((err) =>{
+        console.log(err)
+      })
   }
 
   parseVideos(data) {
-    let vids = data.map((video, i) => {
-      <Video {...vids} key={i} />
-    })
-    return vids
+    this.setState({videos: data})
   }
 
   handleLogout() {
@@ -49,12 +45,12 @@ export default class Home extends Component {
   render(){
     return(
       <div>
-          <SideBar
-            info={this.state.info}
-            logout={this.handleLogout.bind(this)}
-            search={this.handleSearch.bind(this)}
-           />
-          <Main videos={this.parseVideos.bind(this)}/>
+      <SideBar
+      info={this.state.info}
+      logout={this.handleLogout.bind(this)}
+      search={this.handleSearch.bind(this)}
+      />
+      <Main videos={this.state.videos}/>
       </div>
     )
   }
