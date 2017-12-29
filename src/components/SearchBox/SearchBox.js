@@ -11,7 +11,7 @@ export default class SearchBox extends Component {
   render() {
     return(
       <form className="search-box" >
-      <input type="text" placeholder="Search.." name="search"/>
+      <input type="text" placeholder="Search.." name="search" autoComplete='off'/>
       <button className="fa fa-search" type="submit" onClick={this.handleSearch.bind(this)}>
       </button>
       </form>

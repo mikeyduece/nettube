@@ -21,7 +21,7 @@ export default class Video extends Component {
           <div className="card-content">
             <div className="card-title">{this.props.title}</div>
             <p className="card-text">{this.props.description}</p>
-            <button className="btn btn--block card-btn">Button</button>
+            <i className="fa fa-play" aria-hidden="true"></i>
           </div>
         </div>
     )
