@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './Video.css'
+import './Video.scss'
 
 export default class Video extends Component {
   constructor(props) {
