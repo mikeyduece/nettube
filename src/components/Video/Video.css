@@ -3,7 +3,8 @@
   border-style: solid;
   border-color: red;
   margin: 1em .25em;
-  background-color: rgba(46, 47, 48, 0.6);
+  /* background-color: rgba(46, 47, 48, 0.6); */
+  background-color: white;
 
 }
 
@@ -14,6 +15,11 @@
 }
 
 .card-title {
-  color: white;
+  color: black;
+  text-decoration: underline;
   font-size: 1.25em;
+}
+
+.card-text {
+  color: black;
 }

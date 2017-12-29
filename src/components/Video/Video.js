@@ -20,7 +20,7 @@ export default class Video extends Component {
           <img className='video-still' src={this.image()} alt="Video Screenshot" />
           <div className="card-content">
             <div className="card-title">{this.props.title}</div>
-            <p className="card-text"></p>
+            <p className="card-text">{this.props.description}</p>
             <button className="btn btn--block card-btn">Button</button>
           </div>
         </div>
