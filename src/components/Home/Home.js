@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import SideBar from '../../components/SideBar/SideBar'
 import Video from '../Video/Video'
 import Main from '../Main/Main'
+import _ from 'lodash'
 // import {searchYoutube} from './searchYoutube'
 
 import './Home.css'
@@ -20,7 +21,8 @@ export default class Home extends Component {
       .then(response => response.json())
       .then((data) => {
         console.log(data)
-        this.parseVideos(data)
+        let compacted = _.compact(data)
+        this.parseVideos(compacted)
       })
       .catch((err) =>{
         console.log(err)

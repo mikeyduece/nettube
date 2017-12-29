@@ -1,22 +1,29 @@
 import React, {Component} from 'react'
-import './Video.scss'
+import './Video.css'
 
 export default class Video extends Component {
   constructor(props) {
     super(props)
   }
+
+  image(){
+    if(this.props.img_high !== undefined){
+      return this.props.img_high
+    }else{
+      return this.props.img_default
+    }
+  }
+
   render() {
     return(
-      <li className="cards__item">
         <div className="card">
-          <div className="card__image card__image--fence"></div>
-          <div className="card__content">
-            <div className="card__title">Flex</div>
-            <p className="card__text"></p>
-            <button className="btn btn--block card__btn">Button</button>
+          <img className='video-still' src={this.image()} alt="Video Screenshot" />
+          <div className="card-content">
+            <div className="card-title">{this.props.title}</div>
+            <p className="card-text"></p>
+            <button className="btn btn--block card-btn">Button</button>
           </div>
         </div>
-      </li>
     )
   }
 }

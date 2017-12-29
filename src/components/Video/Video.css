@@ -1,0 +1,19 @@
+.card {
+  flex: 0 1 15%;
+  border-style: solid;
+  border-color: red;
+  margin: 1em .25em;
+  background-color: rgba(46, 47, 48, 0.6);
+
+}
+
+.video-still {
+  border-radius: 0;
+  height: 20em;
+  width: 30em;
+}
+
+.card-title {
+  color: white;
+  font-size: 1.25em;
+}
