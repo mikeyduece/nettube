@@ -4,6 +4,9 @@ import './Video.css'
 export default class Video extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      isFav: false
+    }
   }
 
   getVideoId(e){
@@ -20,13 +23,40 @@ export default class Video extends Component {
     }
   }
 
+  handleFav = (e) => {
+    e.preventDefault()
+    let userId = JSON.parse(localStorage.userData).email
+    let heart = e.target.classList
+    let attrs = {
+      'etag': this.props.etag,
+      'vid_id': this.props.vid_id,
+      'img_high': this.props.img_high,
+      'img_default': this.props.img_default,
+      'title': this.props.title,
+      'description': this.props.description,
+
+    }
+    let tokenId = JSON.parse(localStorage.userData).token
+    fetch("http://localhost:3000/api/v1/users/" + userId + "/favorites", {
+      method: 'POST',
+      headers: {
+        "HTTP_AUTHORIZATION": `${tokenId}`,
+        'Authorization': tokenId,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      mode: 'cors',
+      body: JSON.stringify(attrs)
+    })
+  }
+
   changeHeart(e){
     e.preventDefault()
     this.setState({fav: !this.state.fav})
     let tgt = e.target
     if (tgt.tagName === 'I') {
       tgt.classList.toggle('fa-heart');
-      tgt.classList.toggle('fa-heart-o');
+      // tgt.classList.toggle('fa-heart-o');
     }
   }
 
@@ -38,7 +68,7 @@ export default class Video extends Component {
             <div className="card-title">{this.props.title}</div>
             <p className="card-text">{this.props.description}</p>
             <i onClick={this.getVideoId.bind(this)} className="fa fa-play" aria-hidden="true"></i>
-            <i id={this.props.vid_id} onClick={this.changeHeart.bind(this)} className='fa fa-heart-o' aria-hidden="true"></i>
+            <i id={this.props.vid_id} onClick={this.handleFav.bind(this)} className='fa fa-heart-o' aria-hidden="true"></i>
           </div>
 
         </div>

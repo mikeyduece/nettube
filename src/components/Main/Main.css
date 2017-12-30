@@ -22,9 +22,9 @@
 
 .iframe-modal {
   padding-right: 20rem;
-  /* position: relative; */
-  /* height: 40rem; */
-  /* width: 60rem; */
+  position: relative;
+  height: 40rem;
+  width: 60rem;
 }
 
 .fa-times {

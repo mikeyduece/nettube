@@ -53,6 +53,8 @@ export default class Main extends Component {
               <i className='fa fa-times' onClick={this.closeModal}></i>
               <Iframe url={"https://youtube.com/embed/" + this.state.vid_id + '?rel=0&enablejsapi=1" frameborder="0"'}
                       className='iframe-modal'
+                      width='100%'
+                      height='100%'
                       allowFullScreen/>
 
             </Modal>
