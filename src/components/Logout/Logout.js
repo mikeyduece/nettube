@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import GoogleLogout from 'react-google-login'
-import Landing from '../Landing/Landing'
+import './Logout.css'
 
 export default class Logout extends Component {
-  constructor(props) {
-    super(props)
-  }
 
 
   render(){
     return(
-      <GoogleLogout
-        onSuccess={this.props.onClick}
-      >Logout
-      </GoogleLogout>
+      <button className='signout' onClick={this.props.handleLogout}>
+        <i className="fa fa-sign-out" aria-hidden="true"></i>
+      </button>
 
     )
   }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
-// import Landing from './components/Landing/Landing'
 import { PostUser } from './components/PostUser'
 import { endUserSession } from './components/endUserSession'
 import './components/LoginButton/LoginButton'
@@ -28,7 +27,7 @@ class App extends Component {
     }
 
     PostUser(userData, res.accessToken)
-    if(userData.token == res.accessToken){
+    if(userData.token === res.accessToken){
       localStorage.setItem('userData', JSON.stringify(userData))
       this.setState({deets: JSON.parse(localStorage.userData)})
     }

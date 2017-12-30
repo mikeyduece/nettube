@@ -1,13 +1,36 @@
 import React, {Component} from 'react'
 import SideBar from '../../components/SideBar/SideBar'
+import Video from '../Video/Video'
+import Main from '../Main/Main'
+import _ from 'lodash'
+// import {searchYoutube} from './searchYoutube'
+
+import './Home.css'
 
 export default class Home extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
-      info: JSON.parse(props.deets)
+      info: JSON.parse(props.deets),
+      videos: []
     }
+  }
+
+  handleSearch(video) {
+    fetch(`http://localhost:3000/api/v1/search?q=${video}`)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+        let compacted = _.compact(data)
+        this.parseVideos(compacted)
+      })
+      .catch((err) =>{
+        console.log(err)
+      })
+  }
+
+  parseVideos(data) {
+    this.setState({videos: data})
   }
 
   handleLogout() {
@@ -24,12 +47,12 @@ export default class Home extends Component {
   render(){
     return(
       <div>
-        <h1>Home Page</h1>
-        <SideBar info={this.state.info}/>
-        <button onClick={this.handleLogout.bind(this)}
-          token={this.props.token}>
-          Logout
-        </button>
+      <SideBar
+      info={this.state.info}
+      logout={this.handleLogout.bind(this)}
+      search={this.handleSearch.bind(this)}
+      />
+      <Main videos={this.state.videos}/>
       </div>
     )
   }

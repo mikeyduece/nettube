@@ -1,0 +1,43 @@
+.card {
+  flex: 0 1 15%;
+  margin: 1em .25em;
+  background-color: #fcfcfc;
+}
+
+.video-still {
+  border-radius: 0;
+  height: 20em;
+  width: 30em;
+}
+
+.card-title {
+  color: black;
+  text-decoration: underline;
+  font-size: 1.25em;
+}
+
+.card-text {
+  color: black;
+  max-height: 4vmax;
+  overflow: scroll;
+}
+
+.fa-play {
+  font-size: 2.5em;
+  padding-left: .25em;
+  float: left;
+  cursor: pointer;
+}
+
+.fa-heart-o {
+  font-size: 2.5em;
+  float: right;
+  cursor: pointer;
+}
+
+.fa-heart {
+  font-size: 2.5em;
+  float: right;
+  cursor: pointer;
+  color: red;
+}

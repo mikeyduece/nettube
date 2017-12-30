@@ -1,7 +1,7 @@
 
 export function PostUser(userData, tokenId) {
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:3000/api/v1/auth/google_oauth2/callback',{
+     fetch('http://localhost:3000/api/v1/auth/google_oauth2/callback',{
       method: "POST",
       headers: {
         "HTTP_AUTHORIZATION": `${tokenId}`,
