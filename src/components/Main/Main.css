@@ -7,3 +7,16 @@
   background-color: rgba(0,0,0,0.75);
 }
 
+.modal {
+  position: absolute;
+  top: 20rem;
+  left: 13rem;
+  right: 3rem;
+  bottom: 30rem;
+  padding: 10rem;
+  padding-left: 15rem;
+  background-color: rgba(0,0,0,0.75);
+  outline: none;
+  border-radius: .25rem;
+}
+
