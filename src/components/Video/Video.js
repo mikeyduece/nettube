@@ -20,6 +20,16 @@ export default class Video extends Component {
     }
   }
 
+  changeHeart(e){
+    e.preventDefault()
+    this.setState({fav: !this.state.fav})
+    let tgt = e.target
+    if (tgt.tagName === 'I') {
+      tgt.classList.toggle('fa-heart');
+      tgt.classList.toggle('fa-heart-o');
+    }
+  }
+
   render() {
     return(
         <div id={this.props.vid_id} className="card">
@@ -28,6 +38,7 @@ export default class Video extends Component {
             <div className="card-title">{this.props.title}</div>
             <p className="card-text">{this.props.description}</p>
             <i onClick={this.getVideoId.bind(this)} className="fa fa-play" aria-hidden="true"></i>
+            <i id={this.props.vid_id} onClick={this.changeHeart.bind(this)} className='fa fa-heart-o' aria-hidden="true"></i>
           </div>
 
         </div>

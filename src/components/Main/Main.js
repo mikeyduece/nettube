@@ -30,7 +30,7 @@ export default class Main extends Component {
   }
 
 
-  handleModalPlay(id){
+  handleModalPlay = (id) => {
     this.state.vid_id = id
     this.openModal()
   }
@@ -45,13 +45,15 @@ export default class Main extends Component {
           })}
         </div>
         <div>
-          <button onClick={this.openModal}>Open Modal</button>
             <Modal
               className='modal'
               isOpen={this.state.modalIsOpen}
               onRequestClose={this.closeModal}
               contentLabel='Example Modal'>
-              <iframe id='my-video' className='iframe-modal' src={'https://youtube.com/embed/' + this.state.vid_id + '?rel=0&enablejsapi=1" allowFullScreen frameborder="0"'}></iframe>
+              <i className='fa fa-times' onClick={this.closeModal}></i>
+              <Iframe url={"https://youtube.com/embed/" + this.state.vid_id + '?rel=0&enablejsapi=1" frameborder="0"'}
+                      className='iframe-modal'
+                      allowFullScreen/>
 
             </Modal>
         </div>

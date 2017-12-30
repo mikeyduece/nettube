@@ -9,10 +9,10 @@
 
 .modal {
   position: absolute;
-  top: 20rem;
-  left: 13rem;
-  right: 3rem;
-  bottom: 30rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 10rem;
   padding-left: 15rem;
   background-color: rgba(0,0,0,0.75);
@@ -20,3 +20,18 @@
   border-radius: .25rem;
 }
 
+.iframe-modal {
+  padding-right: 20rem;
+  /* position: relative; */
+  /* height: 40rem; */
+  /* width: 60rem; */
+}
+
+.fa-times {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.fa-times:hover {
+  color: red;
+}
