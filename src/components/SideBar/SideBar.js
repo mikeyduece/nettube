@@ -26,7 +26,7 @@ export default class SideBar extends Component {
             <a href="">home</a>
           </li>
           <li>
-            <a href="">favorites</a>
+            <a href="/favorites">favorites</a>
           </li>
           <li>
             <a href="">playlists</a>
