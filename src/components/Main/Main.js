@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Video from '../Video/Video'
 import Modal from 'react-modal'
+import Iframe from 'react-iframe'
 import './Main.css'
 
 export default class Main extends Component {
@@ -9,10 +10,10 @@ export default class Main extends Component {
 
     this.state = {
       modalIsOpen: false,
+      vid_id: null,
     }
 
     this.openModal = this.openModal.bind(this)
-    // this.afterOpenModal = this.afterOpenModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
 
@@ -24,18 +25,14 @@ export default class Main extends Component {
     Modal.setAppElement('body')
   }
 
-  // afterOpenModal() {
-  //   // references are now sync'd and can be accessed.
-  //   this.subtitle.style.color = '#f00';
-  // }
-
   closeModal() {
     this.setState({modalIsOpen: false});
   }
 
 
   handleModalPlay(id){
-    this.props.handleModalPlay(id)
+    this.state.vid_id = id
+    this.openModal()
   }
 
   render(){
@@ -52,19 +49,10 @@ export default class Main extends Component {
             <Modal
               className='modal'
               isOpen={this.state.modalIsOpen}
-              // onAfterOpen={this.afterOpenModal}
               onRequestClose={this.closeModal}
               contentLabel='Example Modal'>
-                <h2>Hello</h2>
-                <button onClick={this.closeModal}>close</button>
-                <div>I am a modal</div>
-                <form>
-                  <input />
-                  <button>tab navigation</button>
-                  <button>stays</button>
-                  <button>inside</button>
-                  <button>the modal</button>
-                </form>
+              <iframe id='my-video' className='iframe-modal' src={'https://youtube.com/embed/' + this.state.vid_id + '?rel=0&enablejsapi=1" allowFullScreen frameborder="0"'}></iframe>
+
             </Modal>
         </div>
       </div>

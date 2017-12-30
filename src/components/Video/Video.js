@@ -9,6 +9,7 @@ export default class Video extends Component {
   getVideoId(e){
     e.preventDefault()
     let vid = e.target.closest('div[class=card]').id
+    this.props.videoId(vid)
   }
 
   image(){
