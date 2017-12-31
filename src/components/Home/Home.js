@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import SideBar from '../../components/SideBar/SideBar'
-import Video from '../Video/Video'
 import Main from '../Main/Main'
 import _ from 'lodash'
 // import {searchYoutube} from './searchYoutube'
@@ -15,6 +14,7 @@ export default class Home extends Component {
       videos: []
     }
   }
+
 
   handleSearch(video) {
     fetch(`http://localhost:3000/api/v1/search?q=${video}`)

@@ -26,7 +26,6 @@ export default class Video extends Component {
   handleFav = (e) => {
     e.preventDefault()
     let userId = JSON.parse(localStorage.userData).email
-    let heart = e.target.classList
     let attrs = {
       'etag': this.props.etag,
       'vid_id': this.props.vid_id,
@@ -56,7 +55,7 @@ export default class Video extends Component {
     let tgt = e.target
     if (tgt.tagName === 'I') {
       tgt.classList.toggle('fa-heart');
-      // tgt.classList.toggle('fa-heart-o');
+      tgt.classList.toggle('fa-heart-o');
     }
   }
 

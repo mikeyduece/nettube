@@ -5,8 +5,8 @@ import Iframe from 'react-iframe'
 import './Main.css'
 
 export default class Main extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       modalIsOpen: false,
@@ -31,7 +31,7 @@ export default class Main extends Component {
 
 
   handleModalPlay = (id) => {
-    this.state.vid_id = id
+    this.setState({vid_id: id})
     this.openModal()
   }
 
