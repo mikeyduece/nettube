@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Creatable } from 'react-select'
 import './Video.css'
 
 export default class Video extends Component {
@@ -49,6 +50,12 @@ export default class Video extends Component {
     })
   }
 
+  getPath() {
+    if(this.props.path !== '/playlist') {
+      return <Creatable />
+    }
+  }
+
   changeHeart(e){
     e.preventDefault()
     this.setState({fav: !this.state.fav})
@@ -67,6 +74,7 @@ export default class Video extends Component {
             <div className="card-title">{this.props.title}</div>
             <p className="card-text">{this.props.description}</p>
             <i onClick={this.getVideoId.bind(this)} className="fa fa-play" aria-hidden="true"></i>
+            {this.getPath()}
             <i id={this.props.vid_id} onClick={this.handleFav.bind(this)} className='fa fa-heart-o' aria-hidden="true"></i>
           </div>
 

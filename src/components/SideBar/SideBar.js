@@ -5,38 +5,66 @@ import Logout from '../Logout/Logout'
 import './SideBar.css'
 
 export default class SideBar extends Component {
-
-  searchHandler(video) {
-    this.props.search(video)
+  constructor(props){
+    super(props)
+    this.state = {
+      playlistNames: [],
+    }
   }
 
-  handleLogout() {
-    this.props.logout()
+  getNames(){
+    let email = JSON.parse(localStorage.userData).email
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      this.state.playlistNames.push(data)
+      console.log(this.state.playlistNames)
+    })
   }
 
-  render(){
-    return(
-      <nav className='naviagtion'>
-        <ul className='mainmenu'>
-        <div className='img-logout'>
-          <img src={this.props.info.image} alt='Avatar' />
-          <Logout handleLogout={this.handleLogout.bind(this)}/>
-        </div>
-        <SearchBox search={this.searchHandler.bind(this)}/>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/favorites">Favorites</Link>
-          </li>
-          <li>
-            <a href="">playlists</a>
+  componentDidMount(){
+    this.getNames()
+  }
+
+  parseNames(){
+}
+
+/*   componentWillUpdate(){ */
+//   this.getNames()
+// }
+/*  */
+searchHandler(video) {
+  this.props.search(video)
+}
+
+handleLogout() {
+  this.props.logout()
+}
+
+render(){
+  return(
+    <nav className='naviagtion'>
+      <ul className='mainmenu'>
+      <div className='img-logout'>
+        <img src={this.props.info.image} alt='Avatar' />
+        <Logout handleLogout={this.handleLogout.bind(this)}/>
+      </div>
+      <SearchBox search={this.searchHandler.bind(this)}/>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/favorites">Favorites</Link>
+        </li>
+        <li>
+            <a href="">Playlists</a>
               <ul className='submenu'>
-              <li>
-                <a href="">
-                  <strong>list of lists</strong>
-                </a>
-              </li>
+                {this.state.playlistNames.map((name) =>
+                  <li key={name}>
+                    <Link  to={{pathname: '/playlist', state: {listName: name}}}>{name}</Link>
+                  </li>
+                )}
               </ul>
           </li>
           <li>

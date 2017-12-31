@@ -46,8 +46,10 @@ export default class Favorite extends Component {
       <div className='favorite-body'>
         <div className='cards'>
           {this.state.favorites.map((video,index) => {
-            return <Video videoId={this.handleModalPlay.bind(this)}
-            key={index} {...video} />
+            return <Video path={this.props.match.path}
+                     videoId={this.handleModalPlay.bind(this)}
+                     key={index} {...video}
+                   />
           })}
         </div>
         <div>

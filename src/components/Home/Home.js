@@ -11,10 +11,29 @@ export default class Home extends Component {
     super(props)
     this.state = {
       info: JSON.parse(props.deets),
-      videos: []
+      videos: [],
+      playlistNames: [],
     }
   }
 
+  getNames(){
+    let email = JSON.parse(localStorage.userData).email
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
+    .then(response => response.json())
+    .then(data => {
+      let names = this.state.playlistNames
+      names.push(data)
+      this.setState({playlistNames: names})
+    })
+  }
+
+  componentDidMount(){
+    this.getNames()
+  }
+
+  componentWillReceiveProps(){
+    this.getNames()
+  }
 
   handleSearch(video) {
     fetch(`http://localhost:3000/api/v1/search?q=${video}`)
@@ -51,8 +70,9 @@ export default class Home extends Component {
       info={this.state.info}
       logout={this.handleLogout.bind(this)}
       search={this.handleSearch.bind(this)}
+      names={this.state.playlistNames}
       />
-      <Main videos={this.state.videos}/>
+      <Main name={this.state.playlistNames} getNames={this.getNames.bind(this)} videos={this.state.videos}/>
       </div>
     )
   }

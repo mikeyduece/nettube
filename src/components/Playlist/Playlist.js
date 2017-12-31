@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
+import Video from '../Video/Video'
+import Modal from 'react-modal'
+import Iframe from 'react-iframe'
 
 export default class Playlist extends Component {
   constructor(props) {
     super(props)
     this.state = {
       modalIsOpen: false,
-      favorites: [],
+      listVids: [],
       vid_id: null,
     }
+
     this.openModal = this.openModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
+  }
+
+  componentWillMount() {
+    let email = JSON.parse(localStorage.userData).email
+    const name  = this.props.location.state.listName[0]
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlists/' + name)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({listVids: Object.values(data)})
+    })
   }
 
   openModal() {
@@ -28,21 +42,12 @@ export default class Playlist extends Component {
   }
 
 
-  componentWillMount(){
-    Modal.setAppElement('body')
-    let email = JSON.parse(localStorage.userData).email
-    fetch('http://localhost:3000/api/v1/users/' + email + '/favorites')
-    .then(response => response.json())
-    .then(data => {
-      this.setState({favorites: data})
-    })
-  }
 
   render() {
     return(
       <div className='playlist-body'>
         <div className='cards'>
-          {this.state.favorites.map((video,index) => {
+          {this.state.listVids.map((video,index) => {
             return <Video videoId={this.handleModalPlay.bind(this)}
             key={index} {...video} />
           })}
