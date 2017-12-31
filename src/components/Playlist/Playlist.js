@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Video from '../Video/Video'
 import Modal from 'react-modal'
 import Iframe from 'react-iframe'
+import _ from 'lodash'
 
 export default class Playlist extends Component {
   constructor(props) {
@@ -17,12 +18,15 @@ export default class Playlist extends Component {
   }
 
   componentWillMount() {
+    Modal.setAppElement('body')
     let email = JSON.parse(localStorage.userData).email
     const name  = this.props.location.state.listName[0]
     fetch('http://localhost:3000/api/v1/users/' + email + '/playlists/' + name)
     .then(response => response.json())
     .then(data => {
-      this.setState({listVids: Object.values(data)})
+      let videos = Object.values(data)
+      this.setState({listVids: _.flatten(videos)})
+      console.log(this.state.listVids)
     })
   }
 
