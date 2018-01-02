@@ -52,7 +52,7 @@ export default class Playlist extends Component {
       <div className='playlist-body'>
         <div className='cards'>
           {this.state.listVids.map((video,index) => {
-            return <Video videoId={this.handleModalPlay.bind(this)}
+            return <Video path={this.props.match.path} videoId={this.handleModalPlay.bind(this)}
             key={index} {...video} />
           })}
         </div>
