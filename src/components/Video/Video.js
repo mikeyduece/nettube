@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Creatable } from 'react-select'
+import 'react-select/dist/react-select.css'
 import './Video.css'
 
 export default class Video extends Component {
@@ -7,6 +8,36 @@ export default class Video extends Component {
     super(props)
     this.state = {
       isFav: false
+    }
+  }
+
+  // removeFav() {
+  //   let email = JSON.parse(localStorage.userData).email
+  //   let vid   = this.props.id
+  //   let name  = this.props.title
+  //   fetch('http://localhost:3000/api/v1/users/' + email + '/favorites/' + vid, {
+  //     method: 'DELETE',
+  //   })
+  //   .then(() => {
+  //     alert(`You have removed ${name} from your favorites.`)
+  //   })
+  //   .catch((err) => {
+  //     console.log(err)
+  //   })
+  // }
+
+  buttonChange(){
+    if(this.props.path === '/favorites') {
+      return <i id={this.props.vid_id}
+                onClick={this.props.removeFav}
+                className='fa fa-times-circle'
+                aria-hidden="true"></i>
+
+    }else {
+      return <i id={this.props.vid_id}
+                onClick={this.handleFav.bind(this)}
+                className='fa fa-heart-o'
+                aria-hidden="true"></i>
     }
   }
 
@@ -52,7 +83,7 @@ export default class Video extends Component {
 
   getPath() {
     if(this.props.path !== '/playlist') {
-      return <Creatable />
+      return <Creatable className='creatable-box'/>
     }
   }
 
@@ -75,7 +106,7 @@ export default class Video extends Component {
             <p className="card-text">{this.props.description}</p>
             <i onClick={this.getVideoId.bind(this)} className="fa fa-play" aria-hidden="true"></i>
             {this.getPath()}
-            <i id={this.props.vid_id} onClick={this.handleFav.bind(this)} className='fa fa-heart-o' aria-hidden="true"></i>
+            {this.buttonChange()}
           </div>
 
         </div>
