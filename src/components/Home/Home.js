@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import SideBar from '../../components/SideBar/SideBar'
 import Main from '../Main/Main'
 import _ from 'lodash'
-// import {searchYoutube} from './searchYoutube'
-
 import './Home.css'
 
 export default class Home extends Component {
@@ -66,13 +64,16 @@ export default class Home extends Component {
   render(){
     return(
       <div>
-      <SideBar
-      info={this.state.info}
-      logout={this.handleLogout.bind(this)}
-      search={this.handleSearch.bind(this)}
-      names={this.state.playlistNames}
-      />
-      <Main name={this.state.playlistNames} getNames={this.getNames.bind(this)} videos={this.state.videos}/>
+        <SideBar
+          info={this.state.info}
+          logout={this.handleLogout.bind(this)}
+          search={this.handleSearch.bind(this)}
+          names={this.state.playlistNames}
+        />
+        <Main
+          name={this.state.playlistNames}
+          getNames={this.getNames.bind(this)}
+          videos={this.state.videos}/>
       </div>
     )
   }

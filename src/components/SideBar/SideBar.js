@@ -30,10 +30,6 @@ export default class SideBar extends Component {
   parseNames(){
 }
 
-/*   componentWillUpdate(){ */
-//   this.getNames()
-// }
-/*  */
 searchHandler(video) {
   this.props.search(video)
 }

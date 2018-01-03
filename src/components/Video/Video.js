@@ -7,24 +7,10 @@ export default class Video extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isFav: false
+      isFav: false,
+      selectedOption: "",
     }
   }
-
-  // removeFav() {
-  //   let email = JSON.parse(localStorage.userData).email
-  //   let vid   = this.props.id
-  //   let name  = this.props.title
-  //   fetch('http://localhost:3000/api/v1/users/' + email + '/favorites/' + vid, {
-  //     method: 'DELETE',
-  //   })
-  //   .then(() => {
-  //     alert(`You have removed ${name} from your favorites.`)
-  //   })
-  //   .catch((err) => {
-  //     console.log(err)
-  //   })
-  // }
 
   buttonChange(){
     if(this.props.path === '/favorites') {
@@ -83,8 +69,16 @@ export default class Video extends Component {
 
   getPath() {
     if(this.props.path !== '/playlist') {
-      return <Creatable className='creatable-box'/>
+      return <Creatable
+                className='creatable-box'
+                onChange={this.handleChange}
+                options={this.props.names}
+             />
     }
+  }
+
+  handleChange(){
+    debugger
   }
 
   changeHeart(e){

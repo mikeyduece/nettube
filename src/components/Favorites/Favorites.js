@@ -41,18 +41,34 @@ export default class Favorite extends Component {
     })
   }
 
+  findVideo(id) {
+    let found = {}
+    this.state.favorites.find((video) => {
+	    if(video.vid_id === id){
+        found = video
+      }
+    })
+    return found
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state !== nextState) {
+      return true
+    }
+  }
+
   removeFav(e) {
-    e.preventDefault
     let email = JSON.parse(localStorage.userData).email
     let vid   = e.target.id
     let name  = e.target.parentElement.firstElementChild.innerHTML
-    let i     = this.state.favorites.indexOf(e.target)
+    let video = this.findVideo(vid)
     fetch('http://localhost:3000/api/v1/users/' + email + '/favorites/' + vid, {
       method: 'DELETE',
     })
     .then(() => {
-      let updatedFavs = this.state.favorites.splice(i, 1)
-      this.setState({favorites: updatedFavs})
+      let i = this.state.favorites.indexOf(video)
+      this.state.favorites.splice(i, 1)
+      this.setState({favorites: this.state.favorites})
       alert(`You have removed ${name} from your favorites.`)
     })
     .catch((err) => {
@@ -65,7 +81,6 @@ export default class Favorite extends Component {
       <div className='favorite-body'>
         <div className='cards'>
           {this.state.favorites.map((video,index) => {
-            console.log(video)
             return <Video path={this.props.match.path}
                      videoId={this.handleModalPlay.bind(this)}
                      removeFav={this.removeFav.bind(this)}
