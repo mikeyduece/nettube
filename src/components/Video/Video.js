@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import _ from 'lodash'
 import { Creatable } from 'react-select'
 import 'react-select/dist/react-select.css'
 import './Video.css'
@@ -67,12 +68,26 @@ export default class Video extends Component {
     })
   }
 
+  getOptions(){
+    let options = []
+    let names = _.flatten(JSON.parse(localStorage.playlistNames))
+    names.forEach((name) => {
+      function Name() {}
+      let opt = new Name()
+      opt.value = name
+      opt.label = name
+      options.push(opt)
+    })
+    return options
+  }
+
   getPath() {
+    let names = _.flatten(JSON.parse(localStorage.playlistNames))
     if(this.props.path !== '/playlist') {
       return <Creatable
                 className='creatable-box'
                 onChange={this.handleChange}
-                options={this.props.names}
+                options={this.getOptions()}
              />
     }
   }

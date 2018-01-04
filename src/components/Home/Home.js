@@ -29,8 +29,11 @@ export default class Home extends Component {
     this.getNames()
   }
 
-  componentWillReceiveProps(){
-    this.getNames()
+
+  shouldComponentUpdate(nextState){
+    if(this.state !== nextState){
+      return true
+    }
   }
 
   handleSearch(video) {
