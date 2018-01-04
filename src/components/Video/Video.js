@@ -86,13 +86,14 @@ export default class Video extends Component {
     if(this.props.path !== '/playlist') {
       return <Creatable
                 className='creatable-box'
+                inputProps={{info: this.props}}
                 onChange={this.handleChange}
                 options={this.getOptions()}
              />
     }
   }
 
-  handleChange(){
+  handleChange(e){
     debugger
   }
 
