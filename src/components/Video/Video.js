@@ -82,7 +82,6 @@ export default class Video extends Component {
   }
 
   getPath() {
-    let names = _.flatten(JSON.parse(localStorage.playlistNames))
     if(this.props.path !== '/playlist') {
       return <Creatable
                 className='creatable-box'
@@ -94,7 +93,32 @@ export default class Video extends Component {
   }
 
   handleChange(e){
-    debugger
+    let attrs = {
+      'etag': this.inputProps.info.etag,
+      'vid_id': this.inputProps.info.vid_id,
+      'img_high': this.inputProps.info.img_high,
+      'img_default': this.inputProps.info.img_default,
+      'title': this.inputProps.info.title,
+      'description': this.inputProps.info.description,
+      'name': e.value
+
+    }
+    let vid_id  = this.inputProps.info.vid_id
+    let email   = JSON.parse(localStorage.userData).email
+    let tokenId = JSON.parse(localStorage.userData).token
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlists/' + vid_id,{
+      method: 'POST',
+      headers: {
+        "HTTP_AUTHORIZATION": `${tokenId}`,
+        'Authorization': tokenId,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      mode: 'cors',
+      body: JSON.stringify(attrs)
+    })
+    .then((resp) => resp.json())
+    .catch((err) => {console.log(err)})
   }
 
   changeHeart(e){

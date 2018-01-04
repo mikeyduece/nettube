@@ -28,6 +28,11 @@ export default class SideBar extends Component {
     this.getNames()
   }
 
+  shouldComponentUpdate(nextState) {
+    if(this.state !== nextState){
+      return true
+    }
+  }
 
   searchHandler(video) {
     this.props.search(video)
@@ -55,11 +60,12 @@ export default class SideBar extends Component {
           <li>
               <a href="">Playlists</a>
                 <ul className='submenu'>
-                  {this.state.playlistNames.map((name) =>
+                  {_.flatten(JSON.parse(localStorage.playlistNames)).map((name) =>
                     <li key={name}>
                       <Link  to={{pathname: '/playlist', state: {listName: name}}}>{name}</Link>
                     </li>
-                  )}
+                  )
+                  }
                 </ul>
             </li>
             <li>

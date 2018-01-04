@@ -20,7 +20,7 @@ export default class Playlist extends Component {
   componentWillMount() {
     Modal.setAppElement('body')
     let email = JSON.parse(localStorage.userData).email
-    const name  = this.props.location.state.listName[0]
+    const name  = this.props.location.state.listName
     fetch('http://localhost:3000/api/v1/users/' + email + '/playlists/' + name)
     .then(response => response.json())
     .then(data => {
