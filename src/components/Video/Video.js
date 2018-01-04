@@ -1,11 +1,30 @@
 import React, {Component} from 'react'
+import _ from 'lodash'
+import { Creatable } from 'react-select'
+import 'react-select/dist/react-select.css'
 import './Video.css'
 
 export default class Video extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isFav: false
+      isFav: false,
+      selectedOption: "",
+    }
+  }
+
+  buttonChange(){
+    if(this.props.path === '/favorites') {
+      return <i id={this.props.vid_id}
+                onClick={this.props.removeFav}
+                className='fa fa-times-circle'
+                aria-hidden="true"></i>
+
+    }else {
+      return <i id={this.props.vid_id}
+                onClick={this.handleFav.bind(this)}
+                className='fa fa-heart-o'
+                aria-hidden="true"></i>
     }
   }
 
@@ -26,7 +45,6 @@ export default class Video extends Component {
   handleFav = (e) => {
     e.preventDefault()
     let userId = JSON.parse(localStorage.userData).email
-    let heart = e.target.classList
     let attrs = {
       'etag': this.props.etag,
       'vid_id': this.props.vid_id,
@@ -50,13 +68,66 @@ export default class Video extends Component {
     })
   }
 
+  getOptions(){
+    let options = []
+    let names = _.flatten(JSON.parse(localStorage.playlistNames))
+    names.forEach((name) => {
+      function Name() {}
+      let opt = new Name()
+      opt.value = name
+      opt.label = name
+      options.push(opt)
+    })
+    return options
+  }
+
+  getPath() {
+    if(this.props.path !== '/playlist') {
+      return <Creatable
+                className='creatable-box'
+                inputProps={{info: this.props}}
+                onChange={this.handleChange}
+                options={this.getOptions()}
+             />
+    }
+  }
+
+  handleChange(e){
+    let attrs = {
+      'etag': this.inputProps.info.etag,
+      'vid_id': this.inputProps.info.vid_id,
+      'img_high': this.inputProps.info.img_high,
+      'img_default': this.inputProps.info.img_default,
+      'title': this.inputProps.info.title,
+      'description': this.inputProps.info.description,
+      'name': e.value
+
+    }
+    let vid_id  = this.inputProps.info.vid_id
+    let email   = JSON.parse(localStorage.userData).email
+    let tokenId = JSON.parse(localStorage.userData).token
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlists/' + vid_id,{
+      method: 'POST',
+      headers: {
+        "HTTP_AUTHORIZATION": `${tokenId}`,
+        'Authorization': tokenId,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      mode: 'cors',
+      body: JSON.stringify(attrs)
+    })
+    .then((resp) => resp.json())
+    .catch((err) => {console.log(err)})
+  }
+
   changeHeart(e){
     e.preventDefault()
     this.setState({fav: !this.state.fav})
     let tgt = e.target
     if (tgt.tagName === 'I') {
       tgt.classList.toggle('fa-heart');
-      // tgt.classList.toggle('fa-heart-o');
+      tgt.classList.toggle('fa-heart-o');
     }
   }
 
@@ -68,7 +139,8 @@ export default class Video extends Component {
             <div className="card-title">{this.props.title}</div>
             <p className="card-text">{this.props.description}</p>
             <i onClick={this.getVideoId.bind(this)} className="fa fa-play" aria-hidden="true"></i>
-            <i id={this.props.vid_id} onClick={this.handleFav.bind(this)} className='fa fa-heart-o' aria-hidden="true"></i>
+            {this.getPath()}
+            {this.buttonChange()}
           </div>
 
         </div>

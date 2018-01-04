@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
 import SideBar from '../../components/SideBar/SideBar'
-import Video from '../Video/Video'
 import Main from '../Main/Main'
 import _ from 'lodash'
-// import {searchYoutube} from './searchYoutube'
-
 import './Home.css'
 
 export default class Home extends Component {
@@ -12,7 +9,30 @@ export default class Home extends Component {
     super(props)
     this.state = {
       info: JSON.parse(props.deets),
-      videos: []
+      videos: [],
+      playlistNames: [],
+    }
+  }
+
+  getNames(){
+    let email = JSON.parse(localStorage.userData).email
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
+    .then(response => response.json())
+    .then(data => {
+      let names = this.state.playlistNames
+      names.push(data)
+      this.setState({playlistNames: names})
+    })
+  }
+
+  componentDidMount(){
+    this.getNames()
+  }
+
+
+  shouldComponentUpdate(nextState){
+    if(this.state !== nextState){
+      return true
     }
   }
 
@@ -47,12 +67,16 @@ export default class Home extends Component {
   render(){
     return(
       <div>
-      <SideBar
-      info={this.state.info}
-      logout={this.handleLogout.bind(this)}
-      search={this.handleSearch.bind(this)}
-      />
-      <Main videos={this.state.videos}/>
+        <SideBar
+          info={this.state.info}
+          logout={this.handleLogout.bind(this)}
+          search={this.handleSearch.bind(this)}
+          names={this.state.playlistNames}
+        />
+        <Main
+          name={this.state.playlistNames}
+          getNames={this.getNames.bind(this)}
+          videos={this.state.videos}/>
       </div>
     )
   }

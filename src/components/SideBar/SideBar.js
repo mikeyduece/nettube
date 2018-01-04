@@ -1,9 +1,38 @@
 import React, {Component} from 'react'
+import _ from 'lodash'
+import {Link} from 'react-router-dom'
 import SearchBox from '../SearchBox/SearchBox'
 import Logout from '../Logout/Logout'
 import './SideBar.css'
 
 export default class SideBar extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      playlistNames: [],
+    }
+  }
+
+  getNames(){
+    let email = JSON.parse(localStorage.userData).email
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
+    .then(response => response.json())
+    .then(data => {
+      this.state.playlistNames.push(data)
+      let playlistNames = this.state.playlistNames
+      localStorage.setItem('playlistNames', JSON.stringify(playlistNames))
+    })
+  }
+
+  componentDidMount(){
+    this.getNames()
+  }
+
+  shouldComponentUpdate(nextState) {
+    if(this.state !== nextState){
+      return true
+    }
+  }
 
   searchHandler(video) {
     this.props.search(video)
@@ -23,26 +52,27 @@ export default class SideBar extends Component {
         </div>
         <SearchBox search={this.searchHandler.bind(this)}/>
           <li>
-            <a href="">home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="/favorites">favorites</a>
+            <Link to="/favorites" >Favorites</Link>
           </li>
           <li>
-            <a href="">playlists</a>
-              <ul className='submenu'>
-              <li>
-                <a href="">
-                  <strong>list of lists</strong>
-                </a>
-              </li>
-              </ul>
-          </li>
-          <li>
-            <a href="">friends</a>
-          </li>
-        </ul>
-      </nav>
-    )
-  }
+              <a href="">Playlists</a>
+                <ul className='submenu'>
+                  {_.flatten(JSON.parse(localStorage.playlistNames)).map((name) =>
+                    <li key={name}>
+                      <Link  to={{pathname: '/playlist', state: {listName: name}}}>{name}</Link>
+                    </li>
+                  )
+                  }
+                </ul>
+            </li>
+            <li>
+              <a href="">friends</a>
+            </li>
+          </ul>
+        </nav>
+      )
+    }
 }
