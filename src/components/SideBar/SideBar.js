@@ -20,9 +20,7 @@ export default class SideBar extends Component {
     .then(data => {
       let newState = [...this.state.playlistNames, ...data]
       this.setState({playlistNames: newState})
-      // this.state.playlistNames.push(data)
-      // let playlistNames = this.state.playlistNames
-      // localStorage.setItem('playlistNames', JSON.stringify(playlistNames))
+      localStorage.setItem('newState', JSON.stringify(newState))
     })
   }
 

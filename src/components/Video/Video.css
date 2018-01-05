@@ -19,7 +19,7 @@
 
 .card-text {
   color: black;
-  max-height: 4vmax;
+  max-height: 8vmax;
   overflow: scroll;
 }
 
@@ -45,8 +45,8 @@
 }
 
 .creatable-box {
-  margin-left: 5em;
   width: 15em;
+  display: inline-block;
 }
 
 .fa-times-circle {

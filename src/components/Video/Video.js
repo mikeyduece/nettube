@@ -76,7 +76,7 @@ export default class Video extends Component {
 
   getOptions(){
     let options = []
-    let names = _.flatten(JSON.parse(localStorage.playlistNames))
+    let names = JSON.parse(localStorage.newState)
     names.forEach((name) => {
       function Name() {}
       let opt = new Name()

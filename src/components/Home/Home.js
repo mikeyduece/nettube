@@ -19,16 +19,15 @@ export default class Home extends Component {
     fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
     .then(response => response.json())
     .then(data => {
-      let names = this.state.playlistNames
-      names.push(data)
-      this.setState({playlistNames: names})
+      let newState = [...this.state.playlistNames, ...data]
+      this.setState({playlistNames: newState})
+      localStorage.setItem('newState', JSON.stringify(newState))
     })
   }
 
   componentDidMount(){
     this.getNames()
   }
-
 
   shouldComponentUpdate(nextState){
     if(this.state !== nextState){
