@@ -18,9 +18,11 @@ export default class SideBar extends Component {
     fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
     .then(response => response.json())
     .then(data => {
-      this.state.playlistNames.push(data)
-      let playlistNames = this.state.playlistNames
-      localStorage.setItem('playlistNames', JSON.stringify(playlistNames))
+      let newState = [...this.state.playlistNames, ...data]
+      this.setState({playlistNames: newState})
+      // this.state.playlistNames.push(data)
+      // let playlistNames = this.state.playlistNames
+      // localStorage.setItem('playlistNames', JSON.stringify(playlistNames))
     })
   }
 
@@ -60,7 +62,7 @@ export default class SideBar extends Component {
           <li>
               <a href="">Playlists</a>
                 <ul className='submenu'>
-                  {_.flatten(JSON.parse(localStorage.playlistNames)).map((name) =>
+                  {this.state.playlistNames.map((name) =>
                     <li key={name}>
                       <Link  to={{pathname: '/playlist', state: {listName: name}}}>{name}</Link>
                     </li>

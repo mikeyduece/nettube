@@ -45,14 +45,43 @@ export default class Playlist extends Component {
     this.openModal()
   }
 
+  findVideo(id) {
+    let found = {}
+    this.state.listVids.find((video) => {
+	    if(video.vid_id === id){
+        found = video
+      }
+    })
+    return found
+  }
 
+  removeFromPlaylist(e) {
+    let email = JSON.parse(localStorage.userData).email
+    let vid   = e.target.id
+    let name  = e.target.parentElement.firstElementChild.innerHTML
+    let video = this.findVideo(vid)
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlists/' + vid, {
+      method: 'DELETE',
+    })
+    .then(() => {
+      let i = this.state.listVids.indexOf(video)
+      this.state.listVids.splice(i, 1)
+      this.setState({listVids: this.state.listVids})
+    })
+    .then(() => {alert(`You have removed ${name} from your playlist.`)})
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 
   render() {
     return(
       <div className='playlist-body'>
         <div className='cards'>
           {this.state.listVids.map((video,index) => {
-            return <Video path={this.props.match.path} videoId={this.handleModalPlay.bind(this)}
+            return <Video path={this.props.match.path}
+                          videoId={this.handleModalPlay.bind(this)}
+                          removeFromPlaylist={this.removeFromPlaylist.bind(this)}
             key={index} {...video} />
           })}
         </div>

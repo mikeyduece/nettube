@@ -20,6 +20,12 @@ export default class Video extends Component {
                 className='fa fa-times-circle'
                 aria-hidden="true"></i>
 
+    }else if(this.props.path === '/playlist'){
+      return <i id={this.props.vid_id}
+                onClick={this.props.removeFromPlaylist}
+                className='fa fa-times-circle'
+                aria-hidden="true"></i>
+
     }else {
       return <i id={this.props.vid_id}
                 onClick={this.handleFav.bind(this)}

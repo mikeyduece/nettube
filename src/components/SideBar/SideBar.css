@@ -34,7 +34,7 @@ li a:hover {
 
 .mainmenu li:hover .submenu {
   display: block;
-  max-height: 200px;
+  max-height: 20em;
 }
 
 .submenu a {
@@ -48,7 +48,7 @@ li a:hover {
 }
 
 .submenu {
-  overflow: hidden;
+  overflow: scroll;
   max-height: 0;
   -webkit-transition: all 0.5s ease-out;
 }
