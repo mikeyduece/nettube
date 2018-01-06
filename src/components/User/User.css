@@ -1,10 +1,51 @@
 .user-card {
-  flex: 0 1 15%;
-  margin: 1em .25em;
-  background-color: #fcfcfc;
+  margin: auto;
+  display: flex;
+  background-color: grey;
+  border-radius: 1em;
+  width: 20em;
 }
 
-.img {
-  float: left;
-  display: inline-block;
+p.user-full-name {
+  font-size: 1.8em;
+  text-align: center;
+  font-family:
 }
+
+.user-img {
+  border-radius: 4em;
+}
+
+.fa-user-plus {
+  color: darkblue;
+  margin: auto;
+  margin-left: 0.5em;
+  margin-right: 0.25em;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.add-friend {
+  display: flex;
+}
+
+.add-friend .tooltiptext {
+    visibility: hidden;
+    width: 10em;
+    background-color: white;
+    color: black;
+    font-weight: 900;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.add-friend:hover .tooltiptext {
+    visibility: visible;
+}
+

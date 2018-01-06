@@ -1,8 +1,9 @@
 .cards {
-  padding-left: 12.5rem;
-  padding-right: 0.5em;
+  margin-top: 5em;
+  margin-left: 12.5rem;
+  padding: 2em;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   background-color: rgba(0,0,0,0.75);
 }
@@ -22,9 +23,9 @@
 
 .iframe-modal {
   padding-right: 20rem;
-  position: relative;
-  height: 40rem;
-  width: 60rem;
+  /* position: relative; */
+  /* height: 40em; */
+  /* width: 60em; */
 }
 
 .fa-times {

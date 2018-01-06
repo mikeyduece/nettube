@@ -64,5 +64,6 @@ img {
 }
 
 .img-logout {
+  display: flex;
 }
 

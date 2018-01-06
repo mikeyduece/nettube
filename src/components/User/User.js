@@ -9,13 +9,12 @@ export default class User extends Component {
   render() {
     return(
       <div className='user-card'>
-        <div className='img'>
-          <img className='user-img' src={this.props.user.image} alt='User Pic'/>
+        <img className='user-img' src={this.props.user.image} alt='User Pic'/>
+        <p className='user-full-name'>{this.props.user.name}</p>
+        <div className='add-friend'>
+          <i className='fa fa-user-plus'></i>
+          <span className="tooltiptext">Add Friend</span>
         </div>
-        <div className='user-full-name'>
-          <p>{this.props.user.name}</p>
-        </div>
-      <button className='add-friend'>Add Friend</button>
       </div>
     )
   }
