@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import _ from 'lodash'
 import { Creatable } from 'react-select'
 import 'react-select/dist/react-select.css'
 import './Video.css'
@@ -17,7 +16,7 @@ export default class Video extends Component {
     if(this.props.path === '/favorites') {
       return <i id={this.props.vid_id}
                 onClick={this.props.removeFav}
-                className='fa fa-times-circle'
+                className='fa fa-heart'
                 aria-hidden="true"></i>
 
     }else if(this.props.path === '/playlist'){

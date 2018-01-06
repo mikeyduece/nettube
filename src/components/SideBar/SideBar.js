@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import _ from 'lodash'
 import {Link} from 'react-router-dom'
 import SearchBox from '../SearchBox/SearchBox'
 import Logout from '../Logout/Logout'
@@ -11,6 +10,7 @@ export default class SideBar extends Component {
     this.state = {
       playlistNames: [],
     }
+    this.addPlaylist = this.addPlaylist.bind(this)
   }
 
   getNames(){
@@ -33,6 +33,13 @@ export default class SideBar extends Component {
       return true
     }
   }
+
+  addPlaylist(newPlaylist){
+    let newState = this.state.playlistNames
+    newState.push(newPlaylist)
+    this.setState({playlistNames: newState})
+  }
+
 
   searchHandler(video) {
     this.props.search(video)

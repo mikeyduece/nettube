@@ -1,0 +1,10 @@
+.user-card {
+  flex: 0 1 15%;
+  margin: 1em .25em;
+  background-color: #fcfcfc;
+}
+
+.img {
+  float: left;
+  display: inline-block;
+}
