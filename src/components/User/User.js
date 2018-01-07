@@ -3,6 +3,18 @@ import './User.css'
 
 export default class User extends Component {
 
+  iconChange(){
+    let id = JSON.parse(localStorage.userData).id
+    return( this.props.friendReqs.outgoing.map(request => {
+      if(request.user_id === id){
+        console.log(request)
+        return <i className="fa fa-clock-o"
+                  aria-hidden="true"></i>
+      }
+    })
+    )
+  }
+
   render() {
     return(
         <div className='user-card'>
@@ -13,7 +25,7 @@ export default class User extends Component {
             <i className='fa fa-user-plus' onClick={this.props.addFriend}></i>
             <span className="tooltiptext">Add Friend</span>
           </div>
-        <i className="fa fa-clock-o" aria-hidden="true"></i>
+          {this.iconChange()}
         </div>
     )
   }
