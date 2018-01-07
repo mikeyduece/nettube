@@ -27,6 +27,9 @@ class App extends Component {
     }
 
     PostUser(userData, res.accessToken)
+    .then(data => {
+      debugger
+    })
     if(userData.token === res.accessToken){
       localStorage.setItem('userData', JSON.stringify(userData))
       this.setState({deets: JSON.parse(localStorage.userData)})

@@ -12,7 +12,26 @@ export default class Home extends Component {
       videos: [],
       playlistNames: [],
       users: [],
+      friendReqs: [],
     }
+  }
+
+  addFriend(e) {
+    let email = JSON.parse(localStorage.userData).email
+    let friend_email = e.target.closest('div[class=user-card]').children[0].textContent
+    let tokenId = JSON.parse(localStorage.userData).token
+    fetch('http://localhost:3000/api/v1/users/'+email+'/add_friend/'+friend_email,{
+      method: 'POST',
+      headers: {
+        "HTTP_AUTHORIZATION": `${tokenId}`,
+        'Authorization': tokenId,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      mode: 'cors',
+      body: JSON.stringify(friend_email)
+
+    })
   }
 
   getNames(){
@@ -38,6 +57,23 @@ export default class Home extends Component {
     })
   }
 
+  getFriendReqs() {
+    let email = JSON.parse(localStorage.userData).email
+    fetch('http://localhost:3000/api/v1/users/'+email+'/requests')
+    .then(resp => resp.json())
+    .then(data => {
+      this.setFriendReqs(data)
+    })
+  }
+
+  setFriendReqs(data) {
+    this.setState({friendReqs: data})
+  }
+
+  componentWillMount(){
+    this.getFriendReqs()
+  }
+
   componentDidMount(){
     this.getNames()
   }
@@ -52,7 +88,6 @@ export default class Home extends Component {
     fetch(`http://localhost:3000/api/v1/search?q=${video}`)
       .then(response => response.json())
       .then((data) => {
-        console.log(data)
         let compacted = _.compact(data)
         this.parseVideos(compacted)
       })
@@ -94,7 +129,9 @@ export default class Home extends Component {
           getNames={this.getNames.bind(this)}
           videos={this.state.videos}
           getUsers={this.getUsers.bind(this)}
-          users={this.state.users}/>
+          users={this.state.users}
+          addFriend={this.addFriend.bind(this)}
+          friendReqs={this.state.friendReqs}/>
 
       </div>
     )

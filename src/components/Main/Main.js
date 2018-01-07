@@ -8,7 +8,6 @@ import './Main.css'
 export default class Main extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       modalIsOpen: false,
       vid_id: null,
@@ -40,14 +39,13 @@ export default class Main extends Component {
   }
 
   handleUsers() {
-    console.log(this.props.users)
     return this.props.users.map((user, i) => {
-      return <User key={user.name} user={user}/>
+      return <User key={user.name} user={user} addFriend={this.props.addFriend}
+                   friendReqs={this.props.friendReqs}/>
     })
   }
 
   handleVideos() {
-    console.log('Videos')
     return this.props.videos.map((video,index) => {
       return (<Video videoId={this.handleModalPlay.bind(this)}
                 key={index} {...video} />)

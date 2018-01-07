@@ -18,7 +18,6 @@ export default class Video extends Component {
                 onClick={this.props.removeFav}
                 className='fa fa-heart'
                 aria-hidden="true"></i>
-
     }else if(this.props.path === '/playlist'){
       return <i id={this.props.vid_id}
                 onClick={this.props.removeFromPlaylist}
