@@ -2,12 +2,6 @@ import React, {Component} from 'react'
 import './User.css'
 
 export default class User extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      pendingReq: false
-    }
-  }
 
   iconChange(){
     let id = JSON.parse(localStorage.userData).id
@@ -15,8 +9,6 @@ export default class User extends Component {
       if(request.user_id === id && request.friend_id === this.props.user.id){
         return <i key={'friendReq' + request.id} className="fa fa-clock-o"
                   aria-hidden="true"></i>
-      }else {
-        return <div></div>
       }
     })
     )

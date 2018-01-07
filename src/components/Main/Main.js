@@ -24,10 +24,6 @@ export default class Main extends Component {
     Modal.setAppElement('body')
   }
 
-  componentDidMount() {
-    this.props.getUsers()
-  }
-
   closeModal() {
     this.setState({modalIsOpen: false});
   }
@@ -39,6 +35,7 @@ export default class Main extends Component {
   }
 
   handleUsers() {
+    console.log('handleUsers')
     return this.props.users.map((user, i) => {
       return <User key={user.name} user={user} addFriend={this.props.addFriend}
                    friendReqs={this.props.friendReqs}/>
@@ -48,17 +45,23 @@ export default class Main extends Component {
   handleVideos() {
     return this.props.videos.map((video,index) => {
       return (<Video videoId={this.handleModalPlay.bind(this)}
-                key={index} {...video} />)
+                key={video.id} {...video} />)
     })
+  }
+
+  handleVidsOrUsers(){
+    if(this.props.videos.length === 0){
+      return this.handleUsers()
+    }else{
+      return this.handleVideos()
+    }
   }
 
   render(){
     return(
       <div className='main-body'>
         <div className='cards'>
-          {this.props.videos.length === 0
-           ? this.handleUsers()
-           : this.handleVideos()}
+          {this.handleVidsOrUsers()}
         </div>
         <div>
             <Modal

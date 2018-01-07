@@ -75,6 +75,7 @@ export default class Home extends Component {
   }
 
   componentDidMount(){
+    this.getUsers()
     this.getNames()
   }
 
@@ -128,7 +129,6 @@ export default class Home extends Component {
           name={this.state.playlistNames}
           getNames={this.getNames.bind(this)}
           videos={this.state.videos}
-          getUsers={this.getUsers.bind(this)}
           users={this.state.users}
           addFriend={this.addFriend.bind(this)}
           friendReqs={this.state.friendReqs}/>

@@ -63,12 +63,18 @@ class App extends Component {
     localStorage.clear()
   }
 
+  loginOrHome(){
+    if(localStorage.userData === undefined){
+      return this.renderLogin()
+    }else {
+      return <Home logout={this.logout.bind(this)} deets={localStorage.userData}/>
+    }
+  }
+
   render() {
     return (
       <div className='App'>
-      {localStorage.userData === undefined
-        ? this.renderLogin()
-        : <Home logout={this.logout.bind(this)} deets={localStorage.userData}/>}
+      {this.loginOrHome()}
       </div>
     )
   }
