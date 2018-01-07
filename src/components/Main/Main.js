@@ -36,7 +36,8 @@ export default class Main extends Component {
 
   handleUsers() {
     console.log('handleUsers')
-    return this.props.users.map((user, i) => {
+    let users = JSON.parse(localStorage.users)
+    return users.map((user, i) => {
       return <User key={user.name} user={user} addFriend={this.props.addFriend}
                    friendReqs={this.props.friendReqs}/>
     })

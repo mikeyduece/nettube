@@ -9,10 +9,7 @@ export default class Home extends Component {
     super(props)
     this.state = {
       info: JSON.parse(props.deets),
-      videos: [],
       playlistNames: [],
-      users: [],
-      friendReqs: [],
     }
   }
 
@@ -34,37 +31,9 @@ export default class Home extends Component {
     })
   }
 
-  getNames(){
-    let email = JSON.parse(localStorage.userData).email
-    fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
-    .then(response => response.json())
-    .then(data => {
-      let newState = [...this.state.playlistNames, ...data]
-      this.setState({playlistNames: newState})
-      localStorage.setItem('newState', JSON.stringify(newState))
-    })
-  }
-
-  handleSearch(video) {
-    fetch(`http://localhost:3000/api/v1/search?q=${video}`)
-      .then(response => response.json())
-      .then((data) => {
-        let compacted = _.compact(data)
-        this.parseVideos(compacted)
-      })
-      .catch((err) =>{
-        console.log(err)
-      })
-  }
-
-  parseVideos(data) {
-    this.setState({videos: data})
-  }
-
   handleLogout() {
     this.props.logout()
   }
-
 
   handleToken() {
     if(this.state.token !== this.props.token){
@@ -78,12 +47,12 @@ export default class Home extends Component {
         <SideBar
           info={this.state.info}
           logout={this.handleLogout.bind(this)}
-          search={this.handleSearch.bind(this)}
+          search={this.props.search}
           names={this.state.playlistNames}
         />
         <Main
           name={this.state.playlistNames}
-          videos={this.state.videos}
+          videos={this.props.videos}
           users={this.props.users}
           addFriend={this.addFriend.bind(this)}
           friendReqs={this.props.friendReqs}/>

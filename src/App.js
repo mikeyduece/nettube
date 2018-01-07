@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
+import _ from 'lodash'
 import GoogleLogin from 'react-google-login';
 import { PostUser } from './components/PostUser'
 import { endUserSession } from './components/endUserSession'
@@ -13,9 +13,26 @@ class App extends Component {
     super(props);
     this.state = {
       deets: null,
+      videos: [],
       users: [],
       friendReqs: []
     }
+  }
+
+  handleSearch(video) {
+    fetch(`http://localhost:3000/api/v1/search?q=${video}`)
+      .then(response => response.json())
+      .then((data) => {
+        let compacted = _.compact(data)
+        this.parseVideos(compacted)
+      })
+      .catch((err) =>{
+        console.log(err)
+      })
+  }
+
+  parseVideos(data) {
+    this.setState({videos: data})
   }
 
   getUsers() {
@@ -23,7 +40,8 @@ class App extends Component {
     fetch('http://localhost:3000/api/v1/users/'+email+'/all_users')
     .then(response => response.json())
     .then(data => {
-      this.parseUsers(data)
+      localStorage.setItem('users', JSON.stringify(data))
+      // this.parseUsers(data)
     })
     .catch(err => {
       console.log(err)
@@ -39,13 +57,13 @@ class App extends Component {
     fetch('http://localhost:3000/api/v1/users/'+email+'/requests')
     .then(resp => resp.json())
     .then(data => {
-      return this.setFriendReqs(data)
+      localStorage.setItem('friendReqs', JSON.stringify(data))
     })
   }
 
-  setFriendReqs(data) {
-    return this.setState({friendReqs: data})
-  }
+  // setFriendReqs(data) {
+  //   return this.setState({friendReqs: data})
+  // }
 
   componentWillMount(){
     this.getFriendReqs()
@@ -110,6 +128,8 @@ class App extends Component {
                    deets={localStorage.userData}
                    users={this.state.users}
                    friendReqs={this.state.friendReqs}
+                   search={this.handleSearch.bind(this)}
+                   videos={this.state.videos}
               />
     }
   }

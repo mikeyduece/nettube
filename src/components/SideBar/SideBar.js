@@ -24,7 +24,7 @@ export default class SideBar extends Component {
     })
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.getNames()
   }
 
@@ -76,7 +76,7 @@ export default class SideBar extends Component {
                 </ul>
             </li>
             <li>
-              <a href="">friends</a>
+              <a href="">Friends</a>
             </li>
           </ul>
         </nav>
