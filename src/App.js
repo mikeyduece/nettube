@@ -17,23 +17,23 @@ class App extends Component {
   }
 
   signIn(res){
-    let userData = {
-      'full_name': res.w3.ig,
-      'first_name': res.w3.ofa,
-      'last_name': res.w3.wea,
-      'email': res.w3.U3,
-      'token': res.accessToken,
-      'image': res.w3.Paa
-    }
 
-    PostUser(userData, res.accessToken)
+    PostUser(res, res.accessToken)
     .then(data => {
-      debugger
+      let userData = {
+        'id': data.id,
+        'full_name': data.name,
+        'first_name': data.first_name,
+        'last_name': data.last_name,
+        'email': data.email,
+        'token': data.token,
+        'image': data.image
+      }
+      if(userData.token === res.accessToken){
+        localStorage.setItem('userData', JSON.stringify(userData))
+        this.setState({deets: JSON.parse(localStorage.userData)})
+      }
     })
-    if(userData.token === res.accessToken){
-      localStorage.setItem('userData', JSON.stringify(userData))
-      this.setState({deets: JSON.parse(localStorage.userData)})
-    }
   }
 
 
