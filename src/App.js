@@ -12,8 +12,47 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deets: null
+      deets: null,
+      users: [],
+      friendReqs: []
     }
+  }
+
+  getUsers() {
+    let email = JSON.parse(localStorage.userData).email
+    fetch('http://localhost:3000/api/v1/users/'+email+'/all_users')
+    .then(response => response.json())
+    .then(data => {
+      this.parseUsers(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  parseUsers(data) {
+    this.setState({users: data})
+  }
+
+  getFriendReqs() {
+    let email = JSON.parse(localStorage.userData).email
+    fetch('http://localhost:3000/api/v1/users/'+email+'/requests')
+    .then(resp => resp.json())
+    .then(data => {
+      return this.setFriendReqs(data)
+    })
+  }
+
+  setFriendReqs(data) {
+    return this.setState({friendReqs: data})
+  }
+
+  componentWillMount(){
+    this.getFriendReqs()
+  }
+
+  componentDidMount(){
+    this.getUsers()
   }
 
   signIn(res){
@@ -68,7 +107,9 @@ class App extends Component {
       return this.renderLogin()
     }else {
       return <Home logout={this.logout.bind(this)}
-                    deets={localStorage.userData}
+                   deets={localStorage.userData}
+                   users={this.state.users}
+                   friendReqs={this.state.friendReqs}
               />
     }
   }

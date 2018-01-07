@@ -45,46 +45,6 @@ export default class Home extends Component {
     })
   }
 
-  getUsers() {
-    let email = JSON.parse(localStorage.userData).email
-    fetch('http://localhost:3000/api/v1/users/'+email+'/all_users')
-    .then(response => response.json())
-    .then(data => {
-      this.parseUsers(data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
-
-  getFriendReqs() {
-    let email = JSON.parse(localStorage.userData).email
-    fetch('http://localhost:3000/api/v1/users/'+email+'/requests')
-    .then(resp => resp.json())
-    .then(data => {
-      this.setFriendReqs(data)
-    })
-  }
-
-  setFriendReqs(data) {
-    this.setState({friendReqs: data})
-  }
-
-  componentWillMount(){
-    this.getFriendReqs()
-  }
-
-  componentDidMount(){
-    this.getUsers()
-    this.getNames()
-  }
-
-  shouldComponentUpdate(nextState){
-    if(this.state !== nextState){
-      return true
-    }
-  }
-
   handleSearch(video) {
     fetch(`http://localhost:3000/api/v1/search?q=${video}`)
       .then(response => response.json())
@@ -99,10 +59,6 @@ export default class Home extends Component {
 
   parseVideos(data) {
     this.setState({videos: data})
-  }
-
-  parseUsers(data) {
-    this.setState({users: data})
   }
 
   handleLogout() {
@@ -127,11 +83,10 @@ export default class Home extends Component {
         />
         <Main
           name={this.state.playlistNames}
-          getNames={this.getNames.bind(this)}
           videos={this.state.videos}
-          users={this.state.users}
+          users={this.props.users}
           addFriend={this.addFriend.bind(this)}
-          friendReqs={this.state.friendReqs}/>
+          friendReqs={this.props.friendReqs}/>
 
       </div>
     )
