@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import SideBar from '../../components/SideBar/SideBar'
 import Main from '../Main/Main'
-import _ from 'lodash'
 import './Home.css'
 
 export default class Home extends Component {
@@ -49,6 +48,7 @@ export default class Home extends Component {
           logout={this.handleLogout.bind(this)}
           search={this.props.search}
           names={this.state.playlistNames}
+          incoming={this.props.incoming}
         />
         <Main
           name={this.state.playlistNames}

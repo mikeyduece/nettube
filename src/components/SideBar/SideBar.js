@@ -10,7 +10,7 @@ export default class SideBar extends Component {
     this.state = {
       playlistNames: [],
     }
-    this.addPlaylist = this.addPlaylist.bind(this)
+    // this.addPlaylist = this.addPlaylist.bind(this)
   }
 
   getNames(){
@@ -34,11 +34,11 @@ export default class SideBar extends Component {
     }
   }
 
-  addPlaylist(newPlaylist){
-    let newState = this.state.playlistNames
-    newState.push(newPlaylist)
-    this.setState({playlistNames: newState})
-  }
+  // addPlaylist(newPlaylist){
+  //   let newState = this.state.playlistNames
+  //   newState.push(newPlaylist)
+  //   this.setState({playlistNames: newState})
+  // }
 
 
   searchHandler(video) {
@@ -77,6 +77,23 @@ export default class SideBar extends Component {
             </li>
             <li>
               <a href="">Friends</a>
+            </li>
+            <li>
+              <a href="">Incoming Friend Requests</a>
+                <ul className='req-submenu'>
+                  {this.props.incoming.map(user =>
+                    <li>
+                      <a href="">
+                        <div className='incoming-user-req'>
+                          <img className='user-img-dropdown' src={user.image}/>
+                          <p className='user-name-dropdown'>{user.name}</p>
+                          <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                          <i className="fa fa-thumbs-down" aria-hidden="true"></i>
+                        </div>
+                      </a>
+                    </li>
+                  )}
+                </ul>
             </li>
           </ul>
         </nav>

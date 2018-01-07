@@ -9,7 +9,11 @@ export default class User extends Component {
     return(friendReqs.outgoing.map((request) => {
       if(request.user_id === id && request.friend_id === this.props.user.id){
         return <i key={'friendReq' + request.id} className="fa fa-clock-o"
-                  aria-hidden="true"></i>
+                  aria-hidden="true">
+                 <span className='pending-req'>
+                   Friend Request Pending
+                 </span>
+               </i>
       }
     })
     )

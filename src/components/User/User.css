@@ -59,3 +59,30 @@ p.user-full-name {
     visibility: visible;
 }
 
+.fa-clock-o .pending-req {
+    visibility: hidden;
+    width: 10em;
+    background-color: lightgrey;
+    color: indianred;
+    font-weight: 900;
+    font-size: 0.7em;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.fa-clock-o:hover .pending-req {
+    visibility: visible;
+}
+
+.incoming-req-container {
+  float: left;
+}
+
+.users-and-continers {
+  display: flex;
+}

@@ -15,7 +15,8 @@ class App extends Component {
       deets: null,
       videos: [],
       users: [],
-      friendReqs: []
+      friendReqs: [],
+      requests: []
     }
   }
 
@@ -61,12 +62,21 @@ class App extends Component {
     })
   }
 
-  // setFriendReqs(data) {
-  //   return this.setState({friendReqs: data})
-  // }
-
   componentWillMount(){
     this.getFriendReqs()
+    this.handleIncomingFriendReq()
+  }
+
+  handleIncomingFriendReq(){
+    let users = JSON.parse(localStorage.users)
+    let incoming = JSON.parse(localStorage.friendReqs).incoming
+     users.filter(user => {
+       incoming.map(req => {
+        if(user.id === req.user_id){
+          this.state.requests.push(user)
+        }
+      })
+    })
   }
 
   componentDidMount(){
@@ -130,6 +140,7 @@ class App extends Component {
                    friendReqs={this.state.friendReqs}
                    search={this.handleSearch.bind(this)}
                    videos={this.state.videos}
+                   incoming={this.state.requests}
               />
     }
   }
