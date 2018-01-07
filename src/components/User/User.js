@@ -5,10 +5,9 @@ export default class User extends Component {
 
   iconChange(){
     let id = JSON.parse(localStorage.userData).id
-    return( this.props.friendReqs.outgoing.map(request => {
+    return( this.props.friendReqs.outgoing.map((request) => {
       if(request.user_id === id){
-        console.log(request)
-        return <i className="fa fa-clock-o"
+        return <i key={'friendReq' + request.id} className="fa fa-clock-o"
                   aria-hidden="true"></i>
       }
     })
