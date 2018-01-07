@@ -5,6 +5,7 @@ button.signout {
   height: 3em;
   width: 5em;
   border-radius: 1em;
+  cursor: pointer;
 }
 
 .fa-sign-out {
