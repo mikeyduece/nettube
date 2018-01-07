@@ -67,7 +67,9 @@ class App extends Component {
     if(localStorage.userData === undefined){
       return this.renderLogin()
     }else {
-      return <Home logout={this.logout.bind(this)} deets={localStorage.userData}/>
+      return <Home logout={this.logout.bind(this)}
+                    deets={localStorage.userData}
+              />
     }
   }
 
