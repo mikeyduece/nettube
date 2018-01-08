@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import _ from 'lodash'
 import {Link} from 'react-router-dom'
 import SearchBox from '../SearchBox/SearchBox'
 import Logout from '../Logout/Logout'
@@ -11,21 +10,6 @@ export default class SideBar extends Component {
     this.state = {
       playlistNames: [],
     }
-  }
-
-  getNames(){
-    let email = JSON.parse(localStorage.userData).email
-    fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
-    .then(response => response.json())
-    .then(data => {
-      let newState = [...this.state.playlistNames, ...data]
-      this.setState({playlistNames: newState})
-      localStorage.setItem('newState', JSON.stringify(newState))
-    })
-  }
-
-  componentDidMount(){
-    this.getNames()
   }
 
   shouldComponentUpdate(nextState) {
@@ -60,7 +44,7 @@ export default class SideBar extends Component {
           <li>
               <a href="">Playlists</a>
                 <ul className='submenu'>
-                  {this.state.playlistNames.map((name) =>
+                  {this.props.names.map((name) =>
                     <li key={name}>
                       <Link  to={{pathname: '/playlist', state: {listName: name}}}>{name}</Link>
                     </li>
@@ -69,7 +53,25 @@ export default class SideBar extends Component {
                 </ul>
             </li>
             <li>
-              <a href="">friends</a>
+              <a href="">Friends</a>
+            </li>
+            <li>
+              <a href="">Incoming Friend Requests</a>
+                <ul className='req-submenu'>
+                  {this.props.incoming.map(user =>
+                    <li>
+                      <a href="">
+                        <div className='incoming-user-req'>
+                          <div className='email' hidden='true'>{user.email}</div>
+                          <img className='user-img-dropdown' src={user.image}/>
+                          <p className='user-name-dropdown'>{user.name}</p>
+                          <i onClick={this.props.accept} className="fa fa-thumbs-up" aria-hidden="true"></i>
+                          <i className="fa fa-thumbs-down" aria-hidden="true"></i>
+                        </div>
+                      </a>
+                    </li>
+                  )}
+                </ul>
             </li>
           </ul>
         </nav>

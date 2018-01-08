@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
+import _ from 'lodash'
 import GoogleLogin from 'react-google-login';
 import { PostUser } from './components/PostUser'
 import { endUserSession } from './components/endUserSession'
@@ -12,25 +12,123 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deets: null
+      deets: null,
+      videos: [],
+      users: [],
+      friendReqs: [],
+      requests: [],
+      playlistNames: [],
     }
   }
 
-  signIn(res){
-    let userData = {
-      'full_name': res.w3.ig,
-      'first_name': res.w3.ofa,
-      'last_name': res.w3.wea,
-      'email': res.w3.U3,
-      'token': res.accessToken,
-      'image': res.w3.Paa
-    }
+  acceptFriend(e){
+    let email = JSON.parse(localStorage.userData).email
+    let friend_email = e.target.closest('div').children[0].textContent
+    let tokenId = JSON.parse(localStorage.userData).token
+    fetch('http://localhost:3000/api/v1/users/'+email+'/accept_request/'+friend_email,{
+      method: 'PATCH',
+      headers: {
+        "HTTP_AUTHORIZATION": `${tokenId}`,
+        'Authorization': tokenId,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      mode: 'cors',
+    })
+  }
 
-    PostUser(userData, res.accessToken)
-    if(userData.token === res.accessToken){
-      localStorage.setItem('userData', JSON.stringify(userData))
-      this.setState({deets: JSON.parse(localStorage.userData)})
+  handleSearch(video) {
+    fetch(`http://localhost:3000/api/v1/search?q=${video}`)
+      .then(response => response.json())
+      .then((data) => {
+        let compacted = _.compact(data)
+        this.parseVideos(compacted)
+      })
+      .catch((err) =>{
+        console.log(err)
+      })
+  }
+
+  parseVideos(data) {
+    this.setState({videos: data})
+  }
+
+  getUsers() {
+    let email =''
+    if(localStorage.userData !== undefined){
+      email = JSON.parse(localStorage.userData).email
     }
+    fetch('http://localhost:3000/api/v1/users/'+email+'/all_users')
+    .then(response => response.json())
+    .then(data => {
+      localStorage.setItem('users', JSON.stringify(data))
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  parseUsers(data) {
+    this.setState({users: data})
+  }
+
+  getFriendReqs() {
+    let email =''
+    if(localStorage.userData !== undefined){
+      email = JSON.parse(localStorage.userData).email
+    }
+    fetch('http://localhost:3000/api/v1/users/'+email+'/requests')
+    .then(resp => resp.json())
+    .then(data => {
+      localStorage.setItem('friendReqs', JSON.stringify(data))
+    })
+  }
+
+  componentWillMount(){
+    this.getUsers()
+    this.handleIncomingFriendReq()
+    this.getNames()
+  }
+
+  handleIncomingFriendReq(){
+    let users = ''
+    let incoming = ''
+    if(localStorage.friendReqs !== undefined &&
+        localStorage.friendReqs.length !== 0 &&
+        localStorage.userData !== undefined){
+      users = JSON.parse(localStorage.users)
+      incoming = JSON.parse(localStorage.friendReqs).incoming
+      users.filter(user => {
+       incoming.map(req => {
+        if(user.id === req.user_id){
+          this.state.requests.push(user)
+        }
+      })
+    })
+    }
+  }
+
+  componentDidMount(){
+    this.getFriendReqs()
+  }
+
+  signIn(res){
+    PostUser(res, res.accessToken)
+    .then(data => {
+      let userData = {
+        'id': data.id,
+        'full_name': data.name,
+        'first_name': data.first_name,
+        'last_name': data.last_name,
+        'email': data.email,
+        'token': data.token,
+        'image': data.image
+      }
+      if(userData.token === res.accessToken){
+        localStorage.setItem('userData', JSON.stringify(userData))
+        this.setState({deets: JSON.parse(localStorage.userData)})
+      }
+    })
   }
 
 
@@ -57,15 +155,42 @@ class App extends Component {
     console.log('logout')
     endUserSession(this.state.deets)
     this.setState({deets: null})
-    localStorage.clear()
+    localStorage.removeItem('userData')
+  }
+
+  loginOrHome(){
+    if(localStorage.userData === undefined){
+      return this.renderLogin()
+    }else {
+      return <Home logout={this.logout.bind(this)}
+                   deets={localStorage.userData}
+                   users={this.state.users}
+                   friendReqs={this.state.friendReqs}
+                   search={this.handleSearch.bind(this)}
+                   videos={this.state.videos}
+                   incoming={this.state.requests}
+                   accept={this.acceptFriend.bind(this)}
+                   names={this.state.playlistNames}
+              />
+    }
+  }
+
+   getNames(){
+    let email = JSON.parse(localStorage.userData).email
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
+    .then(response => response.json())
+    .then(data => {
+      let newState = []
+      newState = [...this.state.playlistNames, ...data]
+      this.setState({playlistNames: newState})
+      localStorage.setItem('newState', JSON.stringify(newState))
+    })
   }
 
   render() {
     return (
       <div className='App'>
-      {localStorage.userData === undefined
-        ? this.renderLogin()
-        : <Home logout={this.logout.bind(this)} deets={localStorage.userData}/>}
+      {this.loginOrHome()}
       </div>
     )
   }

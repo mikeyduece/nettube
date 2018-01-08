@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import _ from 'lodash'
 import { Creatable } from 'react-select'
 import 'react-select/dist/react-select.css'
 import './Video.css'
@@ -19,7 +18,6 @@ export default class Video extends Component {
                 onClick={this.props.removeFav}
                 className='fa fa-times-circle'
                 aria-hidden="true"></i>
-
     }else if(this.props.path === '/playlist'){
       return <i id={this.props.vid_id}
                 onClick={this.props.removeFromPlaylist}

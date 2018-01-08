@@ -8,6 +8,7 @@ export default class Logout extends Component {
     return(
       <button className='signout' onClick={this.props.handleLogout}>
         <i className="fa fa-sign-out" aria-hidden="true"></i>
+        <span className='tooltiptext'>Logout</span>
       </button>
 
     )

@@ -1,6 +1,7 @@
 .card {
   flex: 0 1 15%;
-  margin: 1em .25em;
+  /* margin: 1em .25em; */
+  margin-bottom: 3em;
   background-color: #fcfcfc;
 }
 
@@ -19,7 +20,7 @@
 
 .card-text {
   color: black;
-  max-height: 8vmax;
+  height: 8vmax;
   overflow: scroll;
 }
 

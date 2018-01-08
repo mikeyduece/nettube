@@ -1,12 +1,36 @@
 button.signout {
-  margin-top: 0;
-  margin-left: 1em;
+  /* margin-top: 0; */
+  /* margin-left: 1em; */
+  margin: auto;
+  height: 3em;
+  width: 5em;
+  border-radius: 1em;
+  cursor: pointer;
 }
 
-
 .fa-sign-out {
-  font-size: 2rem;
+  font-size: 2em;
   cursor: pointer;
+}
+
+.signout .tooltiptext {
+    visibility: hidden;
+    width: 10em;
+    background-color: grey;
+    color: black;
+    font-weight: 900;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.signout:hover .tooltiptext {
+    visibility: visible;
 }
 
 /* .fa-sign-out .tooltip { */

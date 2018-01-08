@@ -39,7 +39,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url(https://assets.nflxext.com/ffe/siteui/vlv3/5e3955d1-a2b3-4753-bff2-875bf84330fa/412c42ad-ce5f-4c66-ad9f-3f63cab49b22/US-en-20171030-popsignuptwoweeks-perspective_alpha_website_small.jpg)
+  background: url(https://assets.nflxext.com/ffe/siteui/vlv3/5e3955d1-a2b3-4753-bff2-875bf84330fa/412c42ad-ce5f-4c66-ad9f-3f63cab49b22/US-en-20171030-popsignuptwoweeks-perspective_alpha_website_small.jpg);
 }
 
 button ~ button {
