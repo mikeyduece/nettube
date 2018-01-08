@@ -16,7 +16,8 @@ class App extends Component {
       videos: [],
       users: [],
       friendReqs: [],
-      requests: []
+      requests: [],
+      playlistNames: [],
     }
   }
 
@@ -86,6 +87,7 @@ class App extends Component {
   componentWillMount(){
     this.getUsers()
     this.handleIncomingFriendReq()
+    this.getNames()
   }
 
   handleIncomingFriendReq(){
@@ -170,6 +172,18 @@ class App extends Component {
                    accept={this.acceptFriend.bind(this)}
               />
     }
+  }
+
+   getNames(){
+    let email = JSON.parse(localStorage.userData).email
+    fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
+    .then(response => response.json())
+    .then(data => {
+      let newState = []
+      newState = [...this.state.playlistNames, ...data]
+      this.setState({playlistNames: newState})
+      localStorage.setItem('newState', JSON.stringify(newState))
+    })
   }
 
   render() {

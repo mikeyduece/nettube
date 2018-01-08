@@ -91,7 +91,7 @@ export default class Video extends Component {
                 className='creatable-box'
                 inputProps={{info: this.props}}
                 onChange={this.handleChange}
-                options={this.getOptions()}
+                options={this.getOptions.bind(this)}
              />
     }
   }
