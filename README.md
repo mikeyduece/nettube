@@ -2,6 +2,8 @@
 
 ### A Social networking app for movie and television lovers.
 
+>`create-react-app` to emulate both Facebook and Netflix. You are able to favorite videos and also to add them to individual unique playlists if you so wish. You are also able to friend other users and see their playlists and favorites if you choose to friend them and they accept.
+
 Fork or clone the repo.
 
 #### Install the packages
