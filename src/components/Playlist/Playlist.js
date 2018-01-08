@@ -26,7 +26,6 @@ export default class Playlist extends Component {
     .then(data => {
       let videos = Object.values(data)
       this.setState({listVids: _.flatten(videos)})
-      console.log(this.state.listVids)
     })
   }
 

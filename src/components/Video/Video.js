@@ -89,6 +89,7 @@ export default class Video extends Component {
     if(this.props.path !== '/playlist') {
       return <Creatable
                 className='creatable-box'
+                placeholder={'Add/Select to add to Playlist'}
                 inputProps={{info: this.props}}
                 onChange={this.handleChange}
                 options={this.getOptions()}
@@ -142,9 +143,11 @@ export default class Video extends Component {
           <div className="card-content">
             <div className="card-title">{this.props.title}</div>
             <p className="card-text">{this.props.description}</p>
-            <i onClick={this.getVideoId.bind(this)} className="fa fa-play" aria-hidden="true"></i>
-            {this.getPath()}
-            {this.buttonChange()}
+            <div className='card-bottom'>
+              <i onClick={this.getVideoId.bind(this)} className="fa fa-play" aria-hidden="true"></i>
+              {this.getPath()}
+              {this.buttonChange()}
+            </div>
           </div>
 
         </div>
