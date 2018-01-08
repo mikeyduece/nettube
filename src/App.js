@@ -85,6 +85,7 @@ class App extends Component {
 
   componentWillMount(){
     this.getUsers()
+    this.handleIncomingFriendReq()
   }
 
   handleIncomingFriendReq(){
@@ -107,7 +108,6 @@ class App extends Component {
 
   componentDidMount(){
     this.getFriendReqs()
-    this.handleIncomingFriendReq()
   }
 
   signIn(res){
