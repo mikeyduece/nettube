@@ -47,7 +47,7 @@ export default class Home extends Component {
           info={this.state.info}
           logout={this.handleLogout.bind(this)}
           search={this.props.search}
-          names={this.state.playlistNames}
+          names={this.props.names}
           incoming={this.props.incoming}
           accept={this.props.accept}
         />

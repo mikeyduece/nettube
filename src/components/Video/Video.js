@@ -16,7 +16,7 @@ export default class Video extends Component {
     if(this.props.path === '/favorites') {
       return <i id={this.props.vid_id}
                 onClick={this.props.removeFav}
-                className='fa fa-heart'
+                className='fa fa-times-circle'
                 aria-hidden="true"></i>
     }else if(this.props.path === '/playlist'){
       return <i id={this.props.vid_id}
@@ -91,7 +91,7 @@ export default class Video extends Component {
                 className='creatable-box'
                 inputProps={{info: this.props}}
                 onChange={this.handleChange}
-                options={this.getOptions.bind(this)}
+                options={this.getOptions()}
              />
     }
   }

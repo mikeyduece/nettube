@@ -170,6 +170,7 @@ class App extends Component {
                    videos={this.state.videos}
                    incoming={this.state.requests}
                    accept={this.acceptFriend.bind(this)}
+                   names={this.state.playlistNames}
               />
     }
   }
