@@ -66,66 +66,65 @@ img {
   display: flex;
 }
 
+.mainmenu li:hover .req-submenu {
+  display: block;
+  max-height: 20em;
+}
 
-/* .mainmenu li:hover .req-submenu { */
-/*   display: block; */
-/*   max-height: 20em; */
-/* } */
-/*  */
-/* .req-submenu a { */
-/*   background-color: #E1DFDF; */
-/*   color: #000; */
-/* } */
-/*  */
+.req-submenu a {
+  background-color: #E1DFDF;
+  color: #000;
+}
+
 /* [> [> hover behaviour for links inside .submenu <] <] */
-/* .req-submenu a:hover { */
-/*   background-color: #666; */
-/* } */
-/*  */
-/* .req-submenu { */
-/*   overflow: scroll; */
-/*   max-height: 0; */
-/*   -webkit-transition: all 0.5s ease-out; */
-/* } */
-/*  */
-/* .incoming-user-req { */
-/*   display: flex; */
-/*   [> margin: auto; <] */
-/*   position: relative; */
-/* } */
-/*  */
-/* .user-img-dropdown { */
-/*   height: 3em; */
-/*   width: 3em; */
-/* } */
-/*  */
-/* .user-name-dropdown { */
-/*   font-size: 1rem; */
-/*   display: inline-block; */
-/* } */
-/*  */
-/* .fa-thumbs-up { */
-/*   position: absolute; */
-/*   top: 0; */
-/*   right: 0; */
-/*   color: green; */
-/*   font-size: 1.5em; */
-/* } */
-/*  */
-/* .fa-thumbs-down { */
-/*   position: absolute; */
-/*   bottom: 0; */
-/*   right: 0; */
-/*   color: red; */
-/*   font-size: 1.5em; */
-/* } */
-/*  */
-/* .fa-thumbs-up:hover { */
-/*   cursor: pointer; */
-/*   color: lightgreen; */
-/* } */
-/*  */
-/* .fa-thumbs-down:hover { */
-/*   cursor: pointer; */
-/*   color: #ff8080; */
-/* } */
+.req-submenu a:hover {
+  background-color: #666;
+}
+
+.req-submenu {
+  overflow: scroll;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.incoming-user-req {
+  display: flex;
+  margin: auto;
+  position: relative;
+}
+
+.user-img-dropdown {
+  height: 3em;
+  width: 3em;
+}
+
+.user-name-dropdown {
+  font-size: 1rem;
+  display: inline-block;
+}
+
+.fa-thumbs-up {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: green;
+  font-size: 1.5em;
+}
+
+.fa-thumbs-down {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: red;
+  font-size: 1.5em;
+}
+
+.fa-thumbs-up:hover {
+  cursor: pointer;
+  color: lightgreen;
+}
+
+.fa-thumbs-down:hover {
+  cursor: pointer;
+  color: #ff8080;
+}
