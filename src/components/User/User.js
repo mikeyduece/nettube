@@ -26,8 +26,9 @@ export default class User extends Component {
           <img className='user-img' src={this.props.user.image} alt='User Pic'/>
           <p className='user-full-name'>{this.props.user.name}</p>
           <div className='add-friend'>
-            <i className='fa fa-user-plus' onClick={this.props.addFriend}></i>
-            <span className="tooltiptext">Add Friend</span>
+            <i className='fa fa-user-plus' onClick={this.props.addFriend}>
+              <span className="tooltiptext">Add Friend</span>
+            </i>
           </div>
           {this.iconChange()}
         </div>

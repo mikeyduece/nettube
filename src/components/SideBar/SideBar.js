@@ -10,7 +10,6 @@ export default class SideBar extends Component {
     this.state = {
       playlistNames: [],
     }
-    // this.addPlaylist = this.addPlaylist.bind(this)
   }
 
   getNames(){
@@ -33,13 +32,6 @@ export default class SideBar extends Component {
       return true
     }
   }
-
-  // addPlaylist(newPlaylist){
-  //   let newState = this.state.playlistNames
-  //   newState.push(newPlaylist)
-  //   this.setState({playlistNames: newState})
-  // }
-
 
   searchHandler(video) {
     this.props.search(video)
@@ -87,7 +79,7 @@ export default class SideBar extends Component {
                         <div className='incoming-user-req'>
                           <img className='user-img-dropdown' src={user.image}/>
                           <p className='user-name-dropdown'>{user.name}</p>
-                          <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                          <i className="fa fa-thumbs-up" aria-hidden="true"></i>
                           <i className="fa fa-thumbs-down" aria-hidden="true"></i>
                         </div>
                       </a>

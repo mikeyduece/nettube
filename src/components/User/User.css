@@ -32,20 +32,21 @@ p.user-full-name {
   padding-top: 0.10em;
   padding-right: 0.10em;
   font-size: 1.5em;
-  height: 0.5em
+  height: 0.5em;
+  cursor: help;
 }
 
 .add-friend {
   display: flex;
 }
 
-.add-friend .tooltiptext {
+.fa-user-plus .tooltiptext {
     visibility: hidden;
     width: 10em;
     background-color: white;
     color: black;
     font-weight: 900;
-    font-size: 1em;
+    font-size: 1rem;
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
@@ -55,7 +56,7 @@ p.user-full-name {
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
-.add-friend:hover .tooltiptext {
+.fa-user-plus:hover .tooltiptext {
     visibility: visible;
 }
 
@@ -85,4 +86,5 @@ p.user-full-name {
 
 .users-and-continers {
   display: flex;
+  flex-direction: row;
 }
