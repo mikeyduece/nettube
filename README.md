@@ -4,10 +4,12 @@
 
 Fork or clone the repo.
 
->Install the packages
+#### Install the packages
+
   `npm install`
   
->Start the local server
+#### Start the local server
+
   `npm start`
   
 Log in with your Google account.
