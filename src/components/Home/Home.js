@@ -49,6 +49,7 @@ export default class Home extends Component {
           search={this.props.search}
           names={this.state.playlistNames}
           incoming={this.props.incoming}
+          accept={this.props.accept}
         />
         <Main
           name={this.state.playlistNames}

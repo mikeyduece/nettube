@@ -77,9 +77,10 @@ export default class SideBar extends Component {
                     <li>
                       <a href="">
                         <div className='incoming-user-req'>
+                          <div className='email' hidden='true'>{user.email}</div>
                           <img className='user-img-dropdown' src={user.image}/>
                           <p className='user-name-dropdown'>{user.name}</p>
-                          <i className="fa fa-thumbs-up" aria-hidden="true"></i>
+                          <i onClick={this.props.accept} className="fa fa-thumbs-up" aria-hidden="true"></i>
                           <i className="fa fa-thumbs-down" aria-hidden="true"></i>
                         </div>
                       </a>

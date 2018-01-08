@@ -20,6 +20,22 @@ class App extends Component {
     }
   }
 
+  acceptFriend(e){
+    let email = JSON.parse(localStorage.userData).email
+    let friend_email = e.target.closest('div').children[0].textContent
+    let tokenId = JSON.parse(localStorage.userData).token
+    fetch('http://localhost:3000/api/v1/users/'+email+'/accept_request/'+friend_email,{
+      method: 'PATCH',
+      headers: {
+        "HTTP_AUTHORIZATION": `${tokenId}`,
+        'Authorization': tokenId,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      mode: 'cors',
+    })
+  }
+
   handleSearch(video) {
     fetch(`http://localhost:3000/api/v1/search?q=${video}`)
       .then(response => response.json())
@@ -37,12 +53,14 @@ class App extends Component {
   }
 
   getUsers() {
-    let email = JSON.parse(localStorage.userData).email
+    let email =''
+    if(localStorage.userData !== undefined){
+      email = JSON.parse(localStorage.userData).email
+    }
     fetch('http://localhost:3000/api/v1/users/'+email+'/all_users')
     .then(response => response.json())
     .then(data => {
       localStorage.setItem('users', JSON.stringify(data))
-      // this.parseUsers(data)
     })
     .catch(err => {
       console.log(err)
@@ -54,37 +72,46 @@ class App extends Component {
   }
 
   getFriendReqs() {
-    let email = JSON.parse(localStorage.userData).email
+    let email =''
+    if(localStorage.userData !== undefined){
+      email = JSON.parse(localStorage.userData).email
+      debugger
+    }
     fetch('http://localhost:3000/api/v1/users/'+email+'/requests')
     .then(resp => resp.json())
     .then(data => {
+      debugger
       localStorage.setItem('friendReqs', JSON.stringify(data))
     })
   }
 
   componentWillMount(){
-    this.getFriendReqs()
-    this.handleIncomingFriendReq()
+    this.getUsers()
   }
 
   handleIncomingFriendReq(){
-    let users = JSON.parse(localStorage.users)
-    let incoming = JSON.parse(localStorage.friendReqs).incoming
-     users.filter(user => {
+    let users = ''
+    let incoming = ''
+    if(localStorage.friendReqs.incoming.length !== 0 && localStorage.userData !== undefined){
+      debugger
+      users = JSON.parse(localStorage.users)
+      incoming = JSON.parse(localStorage.friendReqs).incoming
+      users.filter(user => {
        incoming.map(req => {
         if(user.id === req.user_id){
           this.state.requests.push(user)
         }
       })
     })
+    }
   }
 
   componentDidMount(){
-    this.getUsers()
+    this.getFriendReqs()
+    this.handleIncomingFriendReq()
   }
 
   signIn(res){
-
     PostUser(res, res.accessToken)
     .then(data => {
       let userData = {
@@ -127,7 +154,7 @@ class App extends Component {
     console.log('logout')
     endUserSession(this.state.deets)
     this.setState({deets: null})
-    localStorage.clear()
+    localStorage.removeItem('userData')
   }
 
   loginOrHome(){
@@ -141,6 +168,7 @@ class App extends Component {
                    search={this.handleSearch.bind(this)}
                    videos={this.state.videos}
                    incoming={this.state.requests}
+                   accept={this.acceptFriend.bind(this)}
               />
     }
   }

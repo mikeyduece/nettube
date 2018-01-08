@@ -35,13 +35,15 @@ export default class Main extends Component {
   }
 
   handleUsers() {
-    console.log('handleUsers')
-    let users = JSON.parse(localStorage.users)
+    let users = ''
+    if(localStorage.users !== undefined){
+      users = JSON.parse(localStorage.users)
       return users.map((user, i) => {
           return <User key={user.name} user={user} addFriend={this.props.addFriend}
                        friendReqs={this.props.friendReqs}/>
 
     })
+    }
   }
 
   handleVideos() {
