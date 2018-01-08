@@ -12,21 +12,6 @@ export default class SideBar extends Component {
     }
   }
 
-  getNames(){
-    let email = JSON.parse(localStorage.userData).email
-    fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
-    .then(response => response.json())
-    .then(data => {
-      let newState = [...this.state.playlistNames, ...data]
-      this.setState({playlistNames: newState})
-      localStorage.setItem('newState', JSON.stringify(newState))
-    })
-  }
-
-  componentWillMount(){
-    this.getNames()
-  }
-
   shouldComponentUpdate(nextState) {
     if(this.state !== nextState){
       return true
@@ -59,7 +44,7 @@ export default class SideBar extends Component {
           <li>
               <a href="">Playlists</a>
                 <ul className='submenu'>
-                  {this.state.playlistNames.map((name) =>
+                  {this.props.names.map((name) =>
                     <li key={name}>
                       <Link  to={{pathname: '/playlist', state: {listName: name}}}>{name}</Link>
                     </li>

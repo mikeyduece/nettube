@@ -8,7 +8,6 @@ export default class User extends Component {
     let friendReqs = ''
     let requestStuff = JSON.parse(localStorage.friendReqs).status
     if(requestStuff !== 404 && localStorage.userData !== undefined){
-      debugger
        id = JSON.parse(localStorage.userData).id
        friendReqs = JSON.parse(localStorage.friendReqs)
        return(friendReqs.outgoing.map((request) => {

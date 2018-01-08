@@ -75,12 +75,10 @@ class App extends Component {
     let email =''
     if(localStorage.userData !== undefined){
       email = JSON.parse(localStorage.userData).email
-      debugger
     }
     fetch('http://localhost:3000/api/v1/users/'+email+'/requests')
     .then(resp => resp.json())
     .then(data => {
-      debugger
       localStorage.setItem('friendReqs', JSON.stringify(data))
     })
   }
@@ -92,8 +90,9 @@ class App extends Component {
   handleIncomingFriendReq(){
     let users = ''
     let incoming = ''
-    if(localStorage.friendReqs.incoming.length !== 0 && localStorage.userData !== undefined){
-      debugger
+    if(localStorage.friendReqs !== undefined &&
+        localStorage.friendReqs.length !== 0 &&
+        localStorage.userData !== undefined){
       users = JSON.parse(localStorage.users)
       incoming = JSON.parse(localStorage.friendReqs).incoming
       users.filter(user => {
