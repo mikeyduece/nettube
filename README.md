@@ -1,6 +1,7 @@
 #netTube
+###A Social networking app for movie and television lovers.
 
-For or clone the repo.
+Fork or clone the repo.
 
 >Install the packages
   `npm install`
