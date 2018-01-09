@@ -24,13 +24,14 @@ class App extends Component {
 
   getFriends() {
     let email = JSON.parse(localStorage.userData).email
-    let tokenId = JSON.parse(localStorage.userData).token
     fetch('http://localhost:3000/api/v1/users/'+email+'/friends')
     .then(res => res.json())
-    .then(data => {
-      this.setState({friends: data})
-    })
+    .then((data) => this.setFriends(data))
     .catch(err => console.log(err))
+  }
+
+  setFriends(data) {
+    localStorage.setItem('friends', JSON.stringify(data))
   }
 
   acceptFriend(e){
@@ -100,8 +101,6 @@ class App extends Component {
     this.getUsers()
     this.getFriendReqs()
     this.handleIncomingFriendReq()
-    this.getFriends()
-    // this.getNames()
   }
 
   handleIncomingFriendReq(){
@@ -124,6 +123,7 @@ class App extends Component {
 
   componentDidMount(){
     this.getNames()
+    this.getFriends()
   }
 
   signIn(res){

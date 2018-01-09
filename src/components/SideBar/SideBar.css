@@ -128,3 +128,24 @@ img {
   cursor: pointer;
   color: #ff8080;
 }
+
+.mainmenu li:hover .friends-submenu {
+  display: block;
+  max-height: 20em;
+}
+
+.friends-submenu a {
+  background-color: #E1DFDF;
+  color: #000;
+}
+
+/* [> [> hover behaviour for links inside .submenu <] <] */
+.friends-submenu a:hover {
+  background-color: #666;
+}
+
+.friends-submenu {
+  overflow: scroll;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
+}

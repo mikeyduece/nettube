@@ -26,6 +26,16 @@ export default class SideBar extends Component {
     this.props.logout()
   }
 
+  parseFriends() {
+    let friends = JSON.parse(localStorage.friends)
+    return friends.map(friend => {
+    return(<li key={friend.email}>
+                <a>{friend.name}</a>
+           </li>)
+    })
+  }
+
+
   render(){
     return(
       <nav className='naviagtion'>
@@ -51,15 +61,13 @@ export default class SideBar extends Component {
                   )
                   }
                 </ul>
-            </li>
-            <li>
+          </li>
+          <li>
               <a href="">Friends</a>
-                {this.props.friends.map(friend => {
-                  <li key={friend.name}>
-                    <span>{friend.name}</span>
-                  </li>
-                })}
-            </li>
+                <ul className='friends-submenu'>
+                  {this.parseFriends()}
+                </ul>
+           </li>
             <li>
               <a href="">Incoming Friend Requests</a>
                 <ul className='req-submenu'>
@@ -68,7 +76,7 @@ export default class SideBar extends Component {
                       <a href="">
                         <div className='incoming-user-req'>
                           <div className='email' hidden='true'>{user.email}</div>
-                          <img className='user-img-dropdown' src={user.image}/>
+                          <img className='user-img-dropdown' src={user.image} alt='User Profile'/>
                           <p className='user-name-dropdown'>{user.name}</p>
                           <i onClick={this.props.accept} className="fa fa-thumbs-up" aria-hidden="true"></i>
                           <i className="fa fa-thumbs-down" aria-hidden="true"></i>
