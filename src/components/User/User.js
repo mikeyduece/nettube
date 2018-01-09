@@ -6,8 +6,9 @@ export default class User extends Component {
   iconChange(){
     let id = ''
     let friendReqs = ''
-    let requestStuff = JSON.parse(localStorage.friendReqs).status
-    if(requestStuff !== 404 && localStorage.userData !== undefined){
+    let friends = JSON.parse(localStorage.friends)
+    let status = JSON.parse(localStorage.friendReqs).status
+    if(status !== 404 && localStorage.userData !== undefined){
        id = JSON.parse(localStorage.userData).id
        friendReqs = JSON.parse(localStorage.friendReqs)
        return(friendReqs.outgoing.map((request) => {
@@ -19,7 +20,7 @@ export default class User extends Component {
                    </span>
                  </i>
         }
-      })
+       })
       )
     }
   }
