@@ -86,8 +86,9 @@ class App extends Component {
 
   componentWillMount(){
     this.getUsers()
+    this.getFriendReqs()
     this.handleIncomingFriendReq()
-    this.getNames()
+    // this.getNames()
   }
 
   handleIncomingFriendReq(){
@@ -109,7 +110,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.getFriendReqs()
+    this.getNames()
   }
 
   signIn(res){
@@ -176,7 +177,10 @@ class App extends Component {
   }
 
    getNames(){
-    let email = JSON.parse(localStorage.userData).email
+    let email = ''
+    if(localStorage.userData !== undefined){
+      email = JSON.parse(localStorage.userData).email
+    }
     fetch('http://localhost:3000/api/v1/users/' + email + '/playlist_names')
     .then(response => response.json())
     .then(data => {
