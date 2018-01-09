@@ -54,6 +54,11 @@ export default class SideBar extends Component {
             </li>
             <li>
               <a href="">Friends</a>
+                {this.props.friends.map(friend => {
+                  <li key={friend.name}>
+                    <span>{friend.name}</span>
+                  </li>
+                })}
             </li>
             <li>
               <a href="">Incoming Friend Requests</a>

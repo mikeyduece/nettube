@@ -18,7 +18,19 @@ class App extends Component {
       friendReqs: [],
       requests: [],
       playlistNames: [],
+      friends: [],
     }
+  }
+
+  getFriends() {
+    let email = JSON.parse(localStorage.userData).email
+    let tokenId = JSON.parse(localStorage.userData).token
+    fetch('http://localhost:3000/api/v1/users/'+email+'/friends')
+    .then(res => res.json())
+    .then(data => {
+      this.setState({friends: data})
+    })
+    .catch(err => console.log(err))
   }
 
   acceptFriend(e){
@@ -88,6 +100,7 @@ class App extends Component {
     this.getUsers()
     this.getFriendReqs()
     this.handleIncomingFriendReq()
+    this.getFriends()
     // this.getNames()
   }
 
@@ -172,6 +185,7 @@ class App extends Component {
                    incoming={this.state.requests}
                    accept={this.acceptFriend.bind(this)}
                    names={this.state.playlistNames}
+                   friends={this.state.friends}
               />
     }
   }

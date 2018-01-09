@@ -50,6 +50,7 @@ export default class Home extends Component {
           names={this.props.names}
           incoming={this.props.incoming}
           accept={this.props.accept}
+          friends={this.props.friends}
         />
         <Main
           name={this.state.playlistNames}
