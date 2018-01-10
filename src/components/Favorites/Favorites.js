@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Video from '../Video/Video'
 import Modal from 'react-modal'
+import SideBar from '../SideBar/SideBar'
 import Iframe from 'react-iframe'
 
 export default class Favorite extends Component {
