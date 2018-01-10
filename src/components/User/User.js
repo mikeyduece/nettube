@@ -3,25 +3,30 @@ import './User.css'
 
 export default class User extends Component {
 
-  iconChange(){
-    let id = ''
-    let friendReqs = ''
-    let friends = JSON.parse(localStorage.friends)
-    let status = JSON.parse(localStorage.friendReqs).status
-    if(status !== 404 && localStorage.userData !== undefined){
-       id = JSON.parse(localStorage.userData).id
-       friendReqs = JSON.parse(localStorage.friendReqs)
-       return(friendReqs.outgoing.map((request) => {
+  pendingRequest(){
+    let id = JSON.parse(localStorage.userData).id
+    let friendReqs = JSON.parse(localStorage.friendReqs)
+    return(friendReqs.outgoing.map((request) => {
         if(request.user_id === id && request.friend_id === this.props.user.id){
-          return <i key={'friendReq' + request.id} className="fa fa-clock-o"
+          return(<i key={'friendReq' + request.id} className="fa fa-clock-o"
                     aria-hidden="true">
                    <span className='pending-req'>
                      Friend Request Pending
                    </span>
-                 </i>
+                 </i>)
         }
        })
       )
+  }
+
+  friended(){
+    let friends = JSON.parse(localStorage.friends)
+  }
+
+  iconChange(){
+    let status = JSON.parse(localStorage.friendReqs).status
+    if(status !== 404 && localStorage.userData !== undefined){
+       return this.pendingRequest()
     }
   }
 

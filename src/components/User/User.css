@@ -21,6 +21,7 @@ p.user-full-name {
   color: darkblue;
   margin: auto;
   margin-left: 2em;
+  margin-right: .15em;
   font-size: 2em;
   cursor: pointer;
   float: right;
