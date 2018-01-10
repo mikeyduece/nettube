@@ -59,6 +59,8 @@
 .fa-times-circle {
   font-size: 2.5em;
   float: right;
+  padding-bottom: .26em;
+  padding-right: .13em;
   cursor: pointer;
   color: red;
 }
