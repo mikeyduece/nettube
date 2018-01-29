@@ -23,7 +23,10 @@ class App extends Component {
   }
 
   getFriends() {
-    let email = JSON.parse(localStorage.userData).email
+    let email = ''
+    if(localStorage.userData !== undefined){
+      email = JSON.parse(localStorage.userData).email
+    }
     fetch('http://localhost:3000/api/v1/users/'+email+'/friends')
     .then(res => res.json())
     .then((data) => this.setFriends(data))
