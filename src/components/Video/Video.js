@@ -146,8 +146,8 @@ export default class Video extends Component {
             <div className='card-bottom'>
               <i onClick={this.getVideoId.bind(this)} className="fa fa-play" aria-hidden="true"></i>
               {this.getPath()}
-              {this.buttonChange()}
             </div>
+            {this.buttonChange()}
           </div>
 
         </div>
