@@ -15,7 +15,7 @@
     "react-iframe": "^1.1.0",
     "react-modal": "^3.1.10",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17",
+    "react-scripts": "3.4.1",
     "react-select": "^1.1.0",
     "react-sidenav": "^2.1.2"
   },
