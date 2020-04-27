@@ -7,7 +7,7 @@ it('should render the App component without crashing', function () {
   const component = renderer.create(
       <App/>
   )
-  
+
   let tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })
