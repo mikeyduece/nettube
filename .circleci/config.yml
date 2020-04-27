@@ -19,5 +19,5 @@ steps:
       paths:
         - node_modules
     key: v1-dependencies-{{ checksum "package.json" }}
-  - rub: yarn lint
+
   - run: yarn test
