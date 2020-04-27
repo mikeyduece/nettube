@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `"App"`;
+
+exports[`should render the App component without crashing 1`] = `"App"`;

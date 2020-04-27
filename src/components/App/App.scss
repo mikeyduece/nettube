@@ -1,0 +1,15 @@
+@import '../../stylesheets/base';
+
+.app {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  #logo {
+    color: $vivid-red;
+    line-height: normal;
+    vertical-align: center;
+  }
+}
