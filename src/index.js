@@ -1,14 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Routes from './Routes'
-import { BrowserRouter } from 'react-router-dom'
-import registerServiceWorker from './registerServiceWorker';
+// Dependencies
+import React       from 'react'
+import ReactDOM    from 'react-dom'
+import {
+    Router,
+    Route
+}                  from 'react-router-dom'
+import history     from './history'
+// Components
+import Root        from 'Root'
+import App         from 'components/App/App'
+
 
 ReactDOM.render(
-  <BrowserRouter>
-    <div>
-      <Routes />
-    </div>
-  </BrowserRouter>, document.getElementById('root'));
-registerServiceWorker();
+    <Root>
+        <Router history={ history }>
+            <Route exact path='/' component={ App } />
+        </Router>
+    </Root>,
+    document.querySelector('#root')
+)
