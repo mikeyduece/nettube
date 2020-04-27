@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "babel": "^6.23.0",
+    "react-test-renderer": "^16.13.1",
     "redux-devtools-extension": "^2.13.8"
   }
 }
