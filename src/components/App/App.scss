@@ -1,0 +1,13 @@
+@import '../../stylesheets/base';
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  #logo {
+    color: $vivid-red;
+    line-height: normal;
+    vertical-align: center;
+  }
+}
