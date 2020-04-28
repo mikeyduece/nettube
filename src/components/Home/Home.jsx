@@ -5,10 +5,14 @@ import SideNav from "../SideNav/SideNav"
 
 const Home = () => {
   return (
-    <>
-      <SideNav />
-      <h1>Home</h1>
-    </>
+    <div className='home'>
+      <div id='sidenav'>
+        <SideNav />
+      </div>
+      <div id='home'>
+        <h1>Home</h1>
+      </div>
+    </div>
   )
 }
 

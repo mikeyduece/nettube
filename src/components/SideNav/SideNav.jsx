@@ -25,7 +25,6 @@ const SideNav = () => {
                 <li><a href="#0">Blog</a></li>
                 <li><a href="#0">About</a></li>
                 <li><a href="#0">Contact</a></li>
-                <li className="small"><a href="#0">Facebook</a><a href="#0">Instagram</a></li>
               </ul>
             </div>
           </div>

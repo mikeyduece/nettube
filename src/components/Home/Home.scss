@@ -1,8 +1,15 @@
 @import '../../stylesheets/base';
 
 .home {
+  h1 {
+    color: $white;
+  }
+
   display: flex;
   min-height: 100%;
-  width: 80%;
+
+  #home {
+    margin-top: 5em;
+  }
 
 }
