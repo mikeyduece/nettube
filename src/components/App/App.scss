@@ -7,6 +7,11 @@
   align-items: center;
   justify-content: center;
 
+  h1 {
+    color: $white;
+    font-size: 15vw;
+  }
+
   #logo {
     color: $vivid-red;
     line-height: normal;
