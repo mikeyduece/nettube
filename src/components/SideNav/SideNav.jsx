@@ -2,6 +2,7 @@
 import './SideNav.scss'
 import React from 'react'
 import { useSelector } from "react-redux";
+import TopNav from "../TopNav/TopNav";
 
 const SideNav = () => {
   const { isSignedIn } = useSelector(state => state.auth)
@@ -10,13 +11,13 @@ const SideNav = () => {
     if (isSignedIn) {
       return (
         <div className="sidenav page">
-          <header tabIndex="0">Header</header>
+          <TopNav />
           <div id="nav-container">
-            <div className="bg"/>
+            <div className="bg" />
             <div className="button" tabIndex="0">
-              <span className="icon-bar"/>
-              <span className="icon-bar"/>
-              <span className="icon-bar"/>
+              <span className="icon-bar" />
+              <span className="icon-bar" />
+              <span className="icon-bar" />
             </div>
             <div id="nav-content" tabIndex="0">
               <ul>
